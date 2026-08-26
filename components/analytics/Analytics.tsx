@@ -1,26 +1,31 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Script from "next/script";
 
 export const Analytics: React.FC = () => {
   const domain = process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN;
+
   const scriptSrc =
     process.env.NEXT_PUBLIC_ANALYTICS_SRC ||
     "https://plausible.io/js/script.js";
 
-  // Respect user privacy and Do-Not-Track headers
+  const [shouldLoad, setShouldLoad] = useState(false);
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const dnt = navigator.doNotTrack === "1" || window.doNotTrack === "1";
-      if (dnt) {
-        console.debug("[Analytics] Do Not Track active. Skipping telemetry.");
-      }
+    // Respect Do Not Track
+    const dnt = navigator.doNotTrack === "1";
+
+    if (dnt) {
+      console.debug("[Analytics] Do Not Track active. Skipping telemetry.");
+      return;
     }
+
+    setShouldLoad(true);
   }, []);
 
-  if (!domain) {
-    // Zero analytics loaded when environment variable is not configured
+  // Don't load analytics if no domain is configured
+  if (!domain || !shouldLoad) {
     return null;
   }
 
