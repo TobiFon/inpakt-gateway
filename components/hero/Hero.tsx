@@ -13,37 +13,36 @@ export const Hero: React.FC = () => {
 
   return (
     <section className="relative overflow-hidden border-b border-white/10 bg-brand-darkest text-white">
-      {/* Background ambient glow */}
+      {/* Ambient background glow */}
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-[700px] w-[1000px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-primary/15 blur-[160px]" />
 
       {/* =========================================================================
           1. DESKTOP WORLD MAP BACKGROUND (lg and above)
+          - Container is bound to full section (`inset-0`)
+          - Map is anchored to the right
+          - Solid dark gradient on the left guarantees clean contrast behind logo & text
       ========================================================================== */}
-      <div className="pointer-events-none absolute inset-y-0 left-[22%] right-[-10%] z-0 hidden overflow-visible lg:block">
-        {/* Left fade protecting text readability */}
-        <div className="absolute inset-y-0 left-0 z-10 w-[45%] bg-gradient-to-r from-brand-darkest via-brand-darkest/95 via-[30%] to-transparent" />
-        {/* Top/bottom fades */}
-        <div className="absolute inset-x-0 top-0 z-10 h-24 bg-gradient-to-b from-brand-darkest/60 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-t from-brand-darkest via-brand-darkest/60 to-transparent" />
-
-        {/* Map positioning */}
-        <div className="absolute inset-0 flex items-center justify-center translate-y-3 scale-[1.08] xl:translate-y-4 xl:scale-[1.12]">
+      <div className="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden lg:block">
+        {/* Map Positioned across right 75% */}
+        <div className="absolute inset-y-0 left-[24%] right-[-6%] flex items-center justify-center translate-y-3 xl:translate-y-4">
           <WorldMapConnection />
         </div>
+
+        {/* Seamless Left Fade: 100% solid dark behind logo/text, fading into the Atlantic */}
+        <div className="absolute inset-y-0 left-0 z-10 w-[56%] bg-gradient-to-r from-brand-darkest via-brand-darkest via-[65%] to-transparent" />
+
+        {/* Top Vignette (protects logo bar) */}
+        <div className="absolute inset-x-0 top-0 z-10 h-28 bg-gradient-to-b from-brand-darkest via-brand-darkest/80 to-transparent" />
+
+        {/* Bottom Vignette */}
+        <div className="absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-t from-brand-darkest via-brand-darkest/70 to-transparent" />
       </div>
 
       {/* =========================================================================
           2. MOBILE + TABLET WORLD MAP BACKGROUND (Below lg)
-          
-          👉 ADJUST OPACITY & SCALE HERE:
-          - Opacity is set to `opacity-80` (change to `opacity-90` or `opacity-100` if you want it brighter)
-          - Scale is set to `scale-[1.15]` (increase or decrease to zoom)
       ========================================================================== */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-80 lg:hidden">
-        {/* Soft overlay gradient ensuring headline and buttons remain readable */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-brand-darkest/75 via-brand-darkest/45 to-brand-darkest/85" />
-
-        {/* Mobile map placement */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-b from-brand-darkest/80 via-brand-darkest/50 to-brand-darkest/90" />
         <div className="absolute inset-0 flex items-center justify-center translate-y-6 scale-[1.15] sm:scale-[1.1]">
           <WorldMapConnection />
         </div>
