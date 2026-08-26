@@ -1,0 +1,30 @@
+:root {
+  --color-brand-darkest: #061610;
+  --color-brand-darker: #09261c;
+  --color-brand-dark: #0e382a;
+  --color-brand-primary: #144d3a;
+  --color-brand-medium: #1d6b52;
+  --color-brand-light: #288768;
+
+  --color-gold-deep: #9a6310;
+  --color-gold-rich: #ba7a18;
+  --color-gold-primary: #d99227;
+  --color-gold-light: #e5a338;
+  --color-gold-bright: #f3b84a;
+  --color-gold-warm: #fbf2df;
+
+  --color-cream-bg: #faf7f2;
+  --color-cream-card: #ffffff;
+  --color-cream-muted: #f4efe6;
+  --color-cream-border: #e8e2d5;
+
+  --color-charcoal-900: #101614;
+  --color-charcoal-800: #1a2420;
+  --color-charcoal-600: #43514a;
+  --color-charcoal-400: #8a9a92;
+
+  --max-w-site: 1280px;
+  --max-w-content: 1040px;
+  --radius-button: 9999px;
+  --radius-card: 1.25rem;
+}

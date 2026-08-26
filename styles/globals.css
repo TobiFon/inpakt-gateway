@@ -1,0 +1,56 @@
+@import "./tokens.css";
+@import "./animations.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color: var(--color-charcoal-900);
+    background-color: var(--color-cream-bg);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--color-gold-primary);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-primary);
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-forest {
+    background: radial-gradient(
+      circle at 50% 20%,
+      #113f30 0%,
+      #09261c 60%,
+      #051811 100%
+    );
+  }
+
+  .bg-grid-subtle {
+    background-size: 32px 32px;
+    background-image: linear-gradient(
+        to right,
+        rgba(20, 77, 58, 0.04) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgba(20, 77, 58, 0.04) 1px, transparent 1px);
+  }
+}
