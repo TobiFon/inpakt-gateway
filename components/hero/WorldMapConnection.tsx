@@ -1,291 +1,545 @@
-import React from "react";
+// components/hero/WorldMapConnection.tsx
+"use client";
+
+import React, { useMemo } from "react";
 import { useTranslations } from "next-intl";
+import { geoMercator, geoPath } from "d3-geo";
+import { feature } from "topojson-client";
+import worldAtlas from "world-atlas/countries-110m.json";
+
+type Position = {
+  longitude: number;
+  latitude: number;
+};
+
+const MAP_WIDTH = 1600;
+const MAP_HEIGHT = 760;
+
+// Geographic coordinates
+const GERMANY: Position = {
+  longitude: 10.45,
+  latitude: 51.16,
+};
+
+const CAMEROON: Position = {
+  longitude: 12.35,
+  latitude: 5.96,
+};
+
+const cityLights = [
+  // North America
+  [-122.42, 37.77],
+  [-118.24, 34.05],
+  [-104.99, 39.74],
+  [-95.36, 29.76],
+  [-87.63, 41.88],
+  [-74.01, 40.71],
+  [-79.38, 43.65],
+
+  // South America
+  [-46.63, -23.55],
+  [-58.38, -34.6],
+  [-77.04, -12.05],
+  [-74.08, 4.61],
+
+  // Europe
+  [-0.13, 51.51],
+  [2.35, 48.85],
+  [4.9, 52.37],
+  [8.68, 50.11],
+  [13.4, 52.52],
+  [16.37, 48.21],
+  [21.01, 52.23],
+  [18.07, 59.33],
+  [12.57, 55.68],
+  [9.19, 45.46],
+  [-3.7, 40.42],
+
+  // Africa
+  [3.38, 6.52],
+  [7.49, 9.08],
+  [15.06, 4.05],
+  [11.5, 3.87],
+  [3.37, 6.52],
+  [28.05, -26.2],
+  [31.23, 30.04],
+  [-1.29, 36.82],
+
+  // Asia
+  [77.1, 28.7],
+  [72.88, 19.08],
+  [77.59, 12.97],
+  [116.4, 39.9],
+  [121.47, 31.23],
+  [139.69, 35.68],
+  [126.98, 37.57],
+  [103.82, 1.35],
+  [100.5, 13.75],
+
+  // Oceania
+  [151.21, -33.87],
+  [144.96, -37.81],
+];
+
+function createConnectionPath(start: [number, number], end: [number, number]) {
+  const [startX, startY] = start;
+  const [endX, endY] = end;
+
+  const distanceY = endY - startY;
+  const curveStrength = Math.min(Math.abs(distanceY) * 0.9, MAP_WIDTH * 0.16);
+
+  const controlX1 = startX - curveStrength;
+  const controlY1 = startY + distanceY * 0.18;
+
+  const controlX2 = endX - curveStrength * 1.05;
+  const controlY2 = endY - distanceY * 0.22;
+
+  return `
+    M ${startX} ${startY}
+    C ${controlX1} ${controlY1},
+      ${controlX2} ${controlY2},
+      ${endX} ${endY}
+  `;
+}
+
+function Node({
+  x,
+  y,
+  type,
+}: {
+  x: number;
+  y: number;
+  type: "germany" | "cameroon";
+}) {
+  const isGermany = type === "germany";
+  const accent = isGermany ? "#F2B94B" : "#DDBB35";
+  const secondary = isGermany ? "#FFF0B5" : "#FFE16D";
+
+  return (
+    <g transform={`translate(${x} ${y})`}>
+      {/* Outer atmospheric aura */}
+      <circle r="36" fill={accent} opacity="0.1" filter="url(#nodeGlow)" />
+      <circle r="24" fill={accent} opacity="0.14" />
+
+      {/* Radar rings */}
+      <circle
+        r="18"
+        fill="none"
+        stroke={accent}
+        strokeWidth="1"
+        opacity="0.3"
+      />
+      <circle
+        r="12"
+        fill="none"
+        stroke={accent}
+        strokeWidth="1.2"
+        opacity="0.5"
+      />
+
+      {/* Outer ring */}
+      <circle r="8" fill="#0A211B" stroke={accent} strokeWidth="2" />
+
+      {/* Bright center */}
+      <circle r="4" fill={secondary} filter="url(#nodeGlow)" />
+      <circle r="1.6" fill="#FFFFFF" />
+    </g>
+  );
+}
 
 export const WorldMapConnection: React.FC = () => {
   const t = useTranslations("hero");
 
-  // Exact coordinates mapped onto a 1000x560 normalized SVG canvas
-  // Germany: lat ~51N, lon ~10E -> Canvas (X: 520, Y: 145)
-  // Cameroon: lat ~4N, lon ~12E -> Canvas (X: 524, Y: 335)
-  const germanyPoint = { x: 520, y: 145 };
-  const cameroonPoint = { x: 524, y: 335 };
-  const connectionArcPath = `M ${germanyPoint.x} ${germanyPoint.y} C 460 210, 470 270, ${cameroonPoint.x} ${cameroonPoint.y}`;
+  const { countries, pathGenerator, projection } = useMemo(() => {
+    const countriesObject = (
+      worldAtlas.objects as unknown as {
+        countries: object;
+      }
+    ).countries;
+
+    const world = feature(
+      worldAtlas as unknown as Parameters<typeof feature>[0],
+      countriesObject as Parameters<typeof feature>[1]
+    );
+
+    const projection = geoMercator()
+      .translate([MAP_WIDTH / 2, MAP_HEIGHT / 2])
+      .scale(240)
+      .center([10, 20]);
+
+    const pathGenerator = geoPath(projection);
+
+    return {
+      countries: world,
+      pathGenerator,
+      projection,
+    };
+  }, []);
+
+  const germanyPoint = projection([GERMANY.longitude, GERMANY.latitude]) as [
+    number,
+    number
+  ];
+
+  const cameroonPoint = projection([CAMEROON.longitude, CAMEROON.latitude]) as [
+    number,
+    number
+  ];
+
+  const connectionPath = createConnectionPath(germanyPoint, cameroonPoint);
 
   return (
-    <div className="relative w-full overflow-hidden select-none">
-      {/* SVG Canvas Map Graphic */}
+    <div className="relative w-full">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,rgba(209,154,45,0.14),transparent_35%),radial-gradient(circle_at_70%_40%,rgba(38,100,75,0.12),transparent_45%)] blur-3xl" />
+
       <svg
-        viewBox="0 0 1000 560"
-        className="w-full h-auto max-h-[640px] drop-shadow-2xl"
+        viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
+        className="relative z-10 h-auto w-full min-h-[430px] lg:min-h-[520px]"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
+        aria-label="World map showing the connection between Cameroon and Germany"
       >
         <defs>
-          {/* Subtle gradient for landmasses */}
+          {/* Dark land gradient */}
           <linearGradient id="landGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#133527" stopOpacity="0.75" />
-            <stop offset="100%" stopColor="#0B2319" stopOpacity="0.9" />
+            <stop offset="0%" stopColor="#25342E" />
+            <stop offset="45%" stopColor="#17251F" />
+            <stop offset="100%" stopColor="#0D1714" />
           </linearGradient>
 
-          {/* Glow filter for connection pathways */}
-          <filter id="goldGlow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="6" result="blur" />
+          {/* Regional Africa glow */}
+          <radialGradient id="africaGlow">
+            <stop offset="0%" stopColor="#6B5A2D" stopOpacity="0.42" />
+            <stop offset="55%" stopColor="#34402A" stopOpacity="0.16" />
+            <stop offset="100%" stopColor="#0C1714" stopOpacity="0" />
+          </radialGradient>
+
+          {/* Gold connection gradient */}
+          <linearGradient
+            id="connectionGradient"
+            x1="0%"
+            y1="0%"
+            x2="0%"
+            y2="100%"
+          >
+            <stop offset="0%" stopColor="#FFF2B0" />
+            <stop offset="18%" stopColor="#F6C65B" />
+            <stop offset="55%" stopColor="#E9A92F" />
+            <stop offset="100%" stopColor="#FFE37A" />
+          </linearGradient>
+
+          <filter id="routeGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="10" result="blurOne" />
+            <feGaussianBlur
+              in="SourceGraphic"
+              stdDeviation="3"
+              result="blurTwo"
+            />
+            <feMerge>
+              <feMergeNode in="blurOne" />
+              <feMergeNode in="blurTwo" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+
+          <filter id="nodeGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="7" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
 
-          {/* Secondary green glow */}
-          <filter id="greenGlow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="4" result="blur" />
+          <filter id="lightGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="2.5" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
 
-          {/* Linear gradient for connecting curve */}
-          <linearGradient id="routeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#F3B84A" />
-            <stop offset="50%" stopColor="#D99227" />
-            <stop offset="100%" stopColor="#288768" />
-          </linearGradient>
+          {/* Subtle surface texture */}
+          <filter id="mapNoise">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.85"
+              numOctaves="2"
+              stitchTiles="stitch"
+              result="noise"
+            />
+            <feColorMatrix
+              in="noise"
+              type="saturate"
+              values="0"
+              result="monoNoise"
+            />
+            <feComponentTransfer>
+              <feFuncA type="table" tableValues="0 0.07" />
+            </feComponentTransfer>
+            <feBlend in="SourceGraphic" mode="overlay" />
+          </filter>
+
+          {/* Animated particles */}
+          <circle id="travelParticle" r="4.5" fill="#FFF6C9" />
+          <path id="connectionRoute" d={connectionPath} />
         </defs>
 
-        {/* Global Dotted Network Pattern & Subtle Continent Silhouettes */}
-        <g opacity="0.32">
-          {/* North America */}
-          <path
-            d="M 120 70 Q 180 50 240 80 T 290 140 T 240 210 T 170 190 T 130 130 Z"
-            fill="url(#landGradient)"
-            stroke="#1A4D3B"
-            strokeWidth="0.8"
-          />
-          {/* South America */}
-          <path
-            d="M 260 250 Q 320 280 310 370 T 250 480 T 230 380 T 240 270 Z"
-            fill="url(#landGradient)"
-            stroke="#1A4D3B"
-            strokeWidth="0.8"
-          />
-          {/* Eurasia */}
-          <path
-            d="M 450 70 Q 600 40 750 70 T 890 140 T 820 230 T 670 180 T 520 120 Z"
-            fill="url(#landGradient)"
-            stroke="#1A4D3B"
-            strokeWidth="0.8"
-          />
-          {/* Africa */}
-          <path
-            d="M 440 180 Q 560 170 590 230 T 570 360 T 510 470 T 430 310 T 420 230 Z"
-            fill="url(#landGradient)"
-            stroke="#1A4D3B"
-            strokeWidth="0.8"
-          />
-          {/* Australia */}
-          <path
-            d="M 780 340 Q 860 330 870 390 T 800 440 T 750 390 Z"
-            fill="url(#landGradient)"
-            stroke="#1A4D3B"
-            strokeWidth="0.8"
-          />
+        {/* =====================================================
+            BACKGROUND ATMOSPHERE
+        ====================================================== */}
+        <ellipse
+          cx={MAP_WIDTH / 2}
+          cy={MAP_HEIGHT / 2}
+          rx="650"
+          ry="360"
+          fill="url(#africaGlow)"
+          opacity="0.65"
+        />
+
+        {/* =====================================================
+            REAL WORLD MAP
+        ====================================================== */}
+        <g filter="url(#mapNoise)">
+          {(
+            countries as unknown as {
+              features: Array<{
+                geometry: object;
+              }>;
+            }
+          ).features.map((country, index) => {
+            const path = pathGenerator(country as never);
+
+            if (!path) return null;
+
+            return (
+              <path
+                key={index}
+                d={path}
+                fill="url(#landGradient)"
+                stroke="#7C8174"
+                strokeOpacity="0.2"
+                strokeWidth="0.7"
+              />
+            );
+          })}
         </g>
 
-        {/* Dynamic Global Grid Nodes (Atmosphere Points) */}
-        <g fill="#288768" opacity="0.4">
-          <circle cx="160" cy="110" r="1.5" />
-          <circle cx="210" cy="150" r="1.5" />
-          <circle cx="280" cy="320" r="1.5" />
-          <circle cx="680" cy="120" r="1.5" />
-          <circle cx="740" cy="160" r="1.5" />
-          <circle cx="820" cy="380" r="1.5" />
-          <circle cx="470" cy="220" r="1.5" />
-          <circle cx="560" cy="290" r="1.5" />
+        {/* Fine map contour */}
+        <g opacity="0.16">
+          {(
+            countries as unknown as {
+              features: Array<{
+                geometry: object;
+              }>;
+            }
+          ).features.map((country, index) => {
+            const path = pathGenerator(country as never);
+
+            if (!path) return null;
+
+            return (
+              <path
+                key={`outline-${index}`}
+                d={path}
+                fill="none"
+                stroke="#D7C789"
+                strokeWidth="0.3"
+              />
+            );
+          })}
         </g>
 
-        {/* ---------------------------------------------------- */}
-        {/* SIGNATURE CAMEROON <-> GERMANY CONNECTION ARCH       */}
-        {/* ---------------------------------------------------- */}
+        {/* =====================================================
+            SATELLITE CITY LIGHTS
+        ====================================================== */}
+        <g filter="url(#lightGlow)">
+          {cityLights.map(([longitude, latitude], index) => {
+            const point = projection([longitude, latitude]);
 
-        {/* Ambient Glow Aura Behind Route */}
+            if (!point) return null;
+
+            return (
+              <React.Fragment key={index}>
+                <circle
+                  cx={point[0]}
+                  cy={point[1]}
+                  r={index % 4 === 0 ? 3 : 1.8}
+                  fill="#F5C65A"
+                  opacity="0.18"
+                />
+                <circle
+                  cx={point[0]}
+                  cy={point[1]}
+                  r={index % 4 === 0 ? 1.5 : 0.8}
+                  fill="#FFE9A2"
+                  opacity="0.95"
+                />
+              </React.Fragment>
+            );
+          })}
+        </g>
+
+        {/* =====================================================
+            GLOWING CAMEROON-GERMANY CONNECTION
+        ====================================================== */}
+        {/* Soft aura */}
         <path
-          d={connectionArcPath}
-          stroke="#D99227"
-          strokeWidth="10"
+          d={connectionPath}
+          stroke="#DDA329"
+          strokeWidth="32"
+          strokeLinecap="round"
+          opacity="0.08"
+          filter="url(#routeGlow)"
+        />
+
+        {/* Outer glow */}
+        <path
+          d={connectionPath}
+          stroke="#F1B643"
+          strokeWidth="16"
           strokeLinecap="round"
           opacity="0.18"
-          filter="url(#goldGlow)"
+          filter="url(#routeGlow)"
         />
 
-        {/* Secondary Soft Core Line */}
+        {/* Main route */}
         <path
-          d={connectionArcPath}
-          stroke="url(#routeGradient)"
-          strokeWidth="3.5"
+          d={connectionPath}
+          stroke="url(#connectionGradient)"
+          strokeWidth="4.5"
           strokeLinecap="round"
-          opacity="0.75"
+          filter="url(#routeGlow)"
         />
 
-        {/* Animated Flow Dash Particles */}
+        {/* Inner bright filament */}
         <path
-          d={connectionArcPath}
-          stroke="#FFF2D6"
-          strokeWidth="2.5"
+          d={connectionPath}
+          stroke="#FFF7D7"
+          strokeWidth="1.15"
           strokeLinecap="round"
-          strokeDasharray="8 20"
-          className="animate-particle-flow"
+          opacity="0.9"
         />
 
-        {/* Connecting Label Centered on Arc */}
-        <g transform="translate(415, 235)">
-          <rect
-            x="-10"
-            y="-10"
-            width="210"
-            height="20"
-            rx="10"
-            fill="#051811"
-            fillOpacity="0.85"
-            stroke="#D99227"
-            strokeWidth="0.7"
-          />
+        {/* Moving comet particle */}
+        <use href="#travelParticle" filter="url(#routeGlow)">
+          <animateMotion dur="5s" repeatCount="indefinite">
+            <mpath href="#connectionRoute" />
+          </animateMotion>
+        </use>
+
+        <circle r="3" fill="#F4B942" filter="url(#nodeGlow)">
+          <animateMotion dur="5s" begin="-2.5s" repeatCount="indefinite">
+            <mpath href="#connectionRoute" />
+          </animateMotion>
+        </circle>
+
+        {/* =====================================================
+            CENTER CONNECTION TEXT (FULLY TRANSLATED)
+        ====================================================== */}
+        <g
+          transform={`translate(
+            ${Math.min(germanyPoint[0], cameroonPoint[0]) - 260},
+            ${(germanyPoint[1] + cameroonPoint[1]) / 2 - 8}
+          )`}
+        >
           <text
-            x="95"
-            y="3.5"
-            fill="#E5A338"
-            fontSize="7"
+            x="0"
+            y="0"
+            fill="#E7B653"
+            fontSize="12"
             fontWeight="700"
-            textAnchor="middle"
-            letterSpacing="0.8"
+            letterSpacing="2.5px"
           >
-            {t("mapConnecting")}
+            {t("mapConnectingLine1")}
+          </text>
+
+          <text
+            x="-4"
+            y="22"
+            fill="#F5F1E6"
+            fontSize="15"
+            fontWeight="800"
+            letterSpacing="1.2px"
+          >
+            {t("mapConnectingLine2")}
+          </text>
+
+          <text
+            x="-2"
+            y="42"
+            fill="#D6AA54"
+            fontSize="11.5"
+            fontWeight="700"
+            letterSpacing="2px"
+          >
+            {t("mapConnectingLine3")}
           </text>
         </g>
 
-        {/* ---------------------------------------------------- */}
-        {/* NODE: GERMANY                                        */}
-        {/* ---------------------------------------------------- */}
-        <g transform={`translate(${germanyPoint.x}, ${germanyPoint.y})`}>
-          {/* Pulsing Beacon Ring */}
-          <circle
-            cx="0"
-            cy="0"
-            r="16"
-            fill="#D99227"
-            fillOpacity="0.2"
-            className="animate-pulse-glow"
-          />
-          <circle
-            cx="0"
-            cy="0"
-            r="8"
-            fill="#144D3A"
-            stroke="#E5A338"
-            strokeWidth="2"
-          />
-          <circle cx="0" cy="0" r="3.5" fill="#F3B84A" />
+        {/* =====================================================
+            NODE: GERMANY (FULLY TRANSLATED)
+        ====================================================== */}
+        <Node x={germanyPoint[0]} y={germanyPoint[1]} type="germany" />
 
-          {/* Germany Callout Box */}
-          <g
-            transform="translate(24, -26)"
-            className="transition-transform duration-300"
+        <g
+          transform={`translate(
+            ${germanyPoint[0] + 32},
+            ${germanyPoint[1] - 25}
+          )`}
+        >
+          <text
+            fill="#F2F0E8"
+            fontSize="18"
+            fontWeight="800"
+            letterSpacing="1.2px"
           >
-            <rect
-              x="0"
-              y="0"
-              width="105"
-              height="58"
-              rx="8"
-              fill="#061C14"
-              fillOpacity="0.9"
-              stroke="#D99227"
-              strokeWidth="1"
-              filter="url(#goldGlow)"
-            />
-            <text
-              x="12"
-              y="16"
-              fill="#F3B84A"
-              fontSize="9.5"
-              fontWeight="800"
-              letterSpacing="0.6"
-            >
-              {t("germanyTitle")}
-            </text>
-            <text x="12" y="29" fill="#EBF4F0" fontSize="7.5" fontWeight="500">
-              • {t("germanyLine1")}
-            </text>
-            <text x="12" y="40" fill="#EBF4F0" fontSize="7.5" fontWeight="500">
-              • {t("germanyLine2")}
-            </text>
-            <text x="12" y="51" fill="#EBF4F0" fontSize="7.5" fontWeight="500">
-              • {t("germanyLine3")}
-            </text>
-          </g>
+            {t("germanyTitle")}
+          </text>
+
+          <text y="22" fill="#B5B76D" fontSize="12" fontWeight="500">
+            • {t("germanyLine1")}
+          </text>
+
+          <text y="40" fill="#B5B76D" fontSize="12" fontWeight="500">
+            • {t("germanyLine2")}
+          </text>
+
+          <text y="58" fill="#B5B76D" fontSize="12" fontWeight="500">
+            • {t("germanyLine3")}
+          </text>
         </g>
 
-        {/* ---------------------------------------------------- */}
-        {/* NODE: CAMEROON                                       */}
-        {/* ---------------------------------------------------- */}
-        <g transform={`translate(${cameroonPoint.x}, ${cameroonPoint.y})`}>
-          {/* Pulsing Beacon Ring */}
-          <circle
-            cx="0"
-            cy="0"
-            r="18"
-            fill="#10B981"
-            fillOpacity="0.25"
-            className="animate-pulse-glow"
-          />
-          <circle
-            cx="0"
-            cy="0"
-            r="9"
-            fill="#09261C"
-            stroke="#10B981"
-            strokeWidth="2"
-          />
-          <circle cx="0" cy="0" r="4" fill="#34D399" />
+        {/* =====================================================
+            NODE: CAMEROON (FULLY TRANSLATED)
+        ====================================================== */}
+        <Node x={cameroonPoint[0]} y={cameroonPoint[1]} type="cameroon" />
 
-          {/* Cameroon Callout Box */}
-          <g
-            transform="translate(26, -26)"
-            className="transition-transform duration-300"
+        <g
+          transform={`translate(
+            ${cameroonPoint[0] + 36},
+            ${cameroonPoint[1] - 28}
+          )`}
+        >
+          <text
+            fill="#F2F0E8"
+            fontSize="18"
+            fontWeight="800"
+            letterSpacing="1.2px"
           >
-            <rect
-              x="0"
-              y="0"
-              width="112"
-              height="58"
-              rx="8"
-              fill="#061C14"
-              fillOpacity="0.9"
-              stroke="#10B981"
-              strokeWidth="1"
-              filter="url(#greenGlow)"
-            />
-            <text
-              x="12"
-              y="16"
-              fill="#34D399"
-              fontSize="9.5"
-              fontWeight="800"
-              letterSpacing="0.6"
-            >
-              {t("cameroonTitle")}
-            </text>
-            <text x="12" y="29" fill="#EBF4F0" fontSize="7.5" fontWeight="500">
-              • {t("cameroonLine1")}
-            </text>
-            <text x="12" y="40" fill="#EBF4F0" fontSize="7.5" fontWeight="500">
-              • {t("cameroonLine2")}
-            </text>
-            <text x="12" y="51" fill="#EBF4F0" fontSize="7.5" fontWeight="500">
-              • {t("cameroonLine3")}
-            </text>
-          </g>
+            {t("cameroonTitle")}
+          </text>
+
+          <text y="22" fill="#B5B76D" fontSize="12" fontWeight="500">
+            • {t("cameroonLine1")}
+          </text>
+
+          <text y="40" fill="#B5B76D" fontSize="12" fontWeight="500">
+            • {t("cameroonLine2")}
+          </text>
+
+          <text y="58" fill="#B5B76D" fontSize="12" fontWeight="500">
+            • {t("cameroonLine3")}
+          </text>
         </g>
       </svg>
     </div>

@@ -5,6 +5,7 @@ import { ContactMethods } from "@/components/contact/ContactMethods";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { CTASection } from "@/components/shared/CTASection";
 import { createSiteMetadata } from "@/lib/seo";
+import { setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params: { locale },
@@ -20,7 +21,13 @@ export async function generateMetadata({
   });
 }
 
-export default function ContactPage() {
+export default function ContactPage({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  setRequestLocale(locale);
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* 1. Contact Hero */}

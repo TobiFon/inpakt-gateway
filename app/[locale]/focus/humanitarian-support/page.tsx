@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { FocusDetailLayout } from "@/components/focus/FocusDetailLayout";
 import { createSiteMetadata } from "@/lib/seo";
 import { HandHeart } from "lucide-react";
+import { setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params: { locale },
@@ -18,7 +19,12 @@ export async function generateMetadata({
   });
 }
 
-export default function HumanitarianFocusPage() {
+export default function HumanitarianFocusPage({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  setRequestLocale(locale);
   const t = useTranslations("focusDetail.humanitarian");
 
   return (

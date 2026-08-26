@@ -17,7 +17,8 @@ export const OpportunitiesHero: React.FC = () => {
             {t("badge")}
           </Badge>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.15]">
+          <h1 className="font-serif text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-[1.15]">
+            {" "}
             {t("heroTitle")}{" "}
             <span className="text-gold-primary">{t("heroHighlight")}</span>
           </h1>

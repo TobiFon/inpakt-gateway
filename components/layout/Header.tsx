@@ -1,14 +1,16 @@
+// components/layout/Header.tsx
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { usePathname, Link } from "@/i18n/routing";
 import { Menu, Heart } from "lucide-react";
+import { headerNavItems } from "@/content/navigation";
+import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { MobileNav } from "./MobileNav";
-import { Link, usePathname } from "../../i18n/routing";
-import { Container } from "../ui/Container";
-import { mainNavItems } from "../../content/navigation";
-import { Button } from "../ui/Button";
 import { cn } from "@/lib/utils";
 
 export const Header: React.FC = () => {
@@ -16,44 +18,39 @@ export const Header: React.FC = () => {
   const pathname = usePathname();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
+  const handleOpenNav = useCallback(() => setMobileNavOpen(true), []);
+  const handleCloseNav = useCallback(() => setMobileNavOpen(false), []);
+
   return (
-    <header className="sticky top-0 z-40 bg-brand-darkest/95 backdrop-blur-md border-b border-white/10 transition-colors duration-200">
+    <header className="sticky top-0 z-40 bg-[#051811]/95 backdrop-blur-md border-b border-white/10 transition-colors duration-200">
       <Container>
-        <div className="flex items-center justify-between h-20">
-          {/* Logo Identity */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-brand-primary to-gold-primary flex items-center justify-center text-white font-bold text-lg shadow-glow">
-              <span className="leading-none">∩</span>
-            </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1.5">
-                <span className="font-bold text-white text-base tracking-wider">
-                  IMPAKT
-                </span>
-                <span className="text-[10px] text-gold-light uppercase tracking-widest font-semibold">
-                  GATEWAY e.V.
-                </span>
-              </div>
-            </div>
+        <div className="flex items-center justify-between h-16 sm:h-20 gap-4">
+          {/* Logo (Clicks to Home) */}
+          <Link href="/" className="flex items-center shrink-0 group py-1">
+            <Image
+              src="/logo.png"
+              alt="Impakt Gateway e.V."
+              width={220}
+              height={56}
+              priority
+              className="h-8 sm:h-9 md:h-10 lg:h-11 w-auto object-contain transition-opacity group-hover:opacity-90"
+            />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden xl:flex items-center gap-1">
-            {mainNavItems.map((item) => {
-              const isActive =
-                item.href === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(item.href);
+          {/* Desktop Navigation (Sleek 6 items) */}
+          <nav className="hidden xl:flex items-center gap-2">
+            {headerNavItems.map((item) => {
+              const isActive = pathname.startsWith(item.href);
 
               return (
                 <Link
                   key={item.key}
                   href={item.href}
                   className={cn(
-                    "px-3.5 py-1.5 rounded-full text-sm font-medium transition-all duration-150",
+                    "px-4 py-2 rounded-full text-sm font-medium transition-all duration-150 whitespace-nowrap",
                     isActive
-                      ? "text-white bg-white/10 font-semibold"
-                      : "text-white/70 hover:text-white hover:bg-white/5"
+                      ? "text-white bg-white/15 font-semibold shadow-sm"
+                      : "text-white/75 hover:text-white hover:bg-white/5"
                   )}
                 >
                   {t(item.key)}
@@ -62,8 +59,8 @@ export const Header: React.FC = () => {
             })}
           </nav>
 
-          {/* Right Header Elements */}
-          <div className="flex items-center gap-4">
+          {/* Right Header Actions */}
+          <div className="flex items-center gap-3 sm:gap-4 shrink-0">
             <div className="hidden sm:block">
               <LanguageSwitcher variant="light" />
             </div>
@@ -72,18 +69,19 @@ export const Header: React.FC = () => {
               href="/support"
               variant="gold"
               size="sm"
-              className="hidden md:inline-flex"
+              className="hidden lg:inline-flex"
               icon={
-                <Heart className="w-3.5 h-3.5 fill-current text-brand-darkest" />
+                <Heart className="w-3.5 h-3.5 fill-current text-brand-darkest shrink-0" />
               }
             >
               {t("supportButton")}
             </Button>
 
-            {/* Mobile Burger Toggle */}
+            {/* Mobile / Tablet Menu Trigger */}
             <button
-              onClick={() => setMobileNavOpen(true)}
-              className="xl:hidden p-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+              type="button"
+              onClick={handleOpenNav}
+              className="xl:hidden p-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 active:bg-white/20 transition-colors cursor-pointer"
               aria-label={t("openMenu")}
             >
               <Menu className="w-6 h-6" />
@@ -92,11 +90,8 @@ export const Header: React.FC = () => {
         </div>
       </Container>
 
-      {/* Slide-out Mobile Nav */}
-      <MobileNav
-        isOpen={mobileNavOpen}
-        onClose={() => setMobileNavOpen(false)}
-      />
+      {/* Slide-out Portal Drawer */}
+      <MobileNav isOpen={mobileNavOpen} onClose={handleCloseNav} />
     </header>
   );
 };

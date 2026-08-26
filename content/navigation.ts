@@ -1,12 +1,25 @@
-import { FocusArea, NavItem } from "../types/site";
+// content/navigation.ts
+import { FocusArea, NavItem } from "@/types/site";
 
-export const mainNavItems: NavItem[] = [
+// Clean, high-priority links for the desktop header (5-6 items max)
+export const headerNavItems: NavItem[] = [
+  { key: "about", href: "/about" },
+  { key: "focus", href: "/focus" },
+  { key: "work", href: "/work" },
+  { key: "partnerships", href: "/partnerships" },
+  { key: "opportunities", href: "/opportunities" },
+  { key: "contact", href: "/contact" },
+];
+
+// Complete links for mobile drawer and footer
+export const allNavItems: NavItem[] = [
   { key: "home", href: "/" },
   { key: "about", href: "/about" },
   { key: "focus", href: "/focus" },
   { key: "work", href: "/work" },
   { key: "partnerships", href: "/partnerships" },
   { key: "opportunities", href: "/opportunities" },
+  { key: "stories", href: "/stories" },
   { key: "support", href: "/support" },
   { key: "contact", href: "/contact" },
 ];
@@ -45,6 +58,6 @@ export const focusAreas: FocusArea[] = [
     titleKey: "focusAreas.humanitarian",
     descKey: "focusAreas.humanitarianDesc",
     slug: "/focus/humanitarian-support",
-    iconName: "HandHeart",
+    iconName: "ShieldHeart",
   },
 ];

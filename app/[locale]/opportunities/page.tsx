@@ -1,4 +1,5 @@
 import React from "react";
+import { setRequestLocale } from "next-intl/server";
 import { OpportunitiesHero } from "@/components/opportunities/OpportunitiesHero";
 import { OpportunitiesGrid } from "@/components/opportunities/OpportunitiesGrid";
 import { CTASection } from "@/components/shared/CTASection";
@@ -19,16 +20,17 @@ export async function generateMetadata({
   });
 }
 
-export default function OpportunitiesPage() {
+export default function OpportunitiesPage({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  setRequestLocale(locale);
+
   return (
     <div className="flex flex-col min-h-screen">
-      {/* 1. Page Hero */}
       <OpportunitiesHero />
-
-      {/* 2. Interactive Filters & Verified Opportunity Grid / Pipeline State */}
       <OpportunitiesGrid initialOpportunities={opportunities} />
-
-      {/* 3. Global Conversion Banner */}
       <CTASection />
     </div>
   );

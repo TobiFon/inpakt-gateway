@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { locales } from "@/i18n/routing";
 import { projects } from "@/content/project";
 import { opportunities } from "@/content/opportunities";
+import { stories } from "@/content/stories";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl =
@@ -20,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/work",
     "/partnerships",
     "/opportunities",
+    "/stories",
     "/support",
     "/contact",
     "/legal/impressum",
@@ -83,6 +85,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: new Date(),
         changeFrequency: "weekly",
         priority: 0.7,
+      });
+    }
+  }
+
+  // Dynamic verified stories
+  const verifiedStories = stories.filter((s) => s.verified);
+  for (const story of verifiedStories) {
+    for (const locale of locales) {
+      sitemapEntries.push({
+        url: `${baseUrl}/${locale}/stories/${story.slug}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly",
+        priority: 0.6,
       });
     }
   }

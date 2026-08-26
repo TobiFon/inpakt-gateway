@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslations } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 import { GraduationCap } from "lucide-react";
 import { FocusDetailLayout } from "@/components/focus/FocusDetailLayout";
 import { createSiteMetadata } from "@/lib/seo";
@@ -18,7 +19,12 @@ export async function generateMetadata({
   });
 }
 
-export default function EducationFocusPage() {
+export default function EducationFocusPage({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  setRequestLocale(locale);
   const t = useTranslations("focusDetail.education");
 
   return (

@@ -1,8 +1,10 @@
+"use client";
+
 import React from "react";
 import { useTranslations } from "next-intl";
 import { Heart, Users2 } from "lucide-react";
-import { Container } from "../ui/Container";
-import { Button } from "../ui/Button";
+import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
 
 export const CTASection: React.FC = () => {
   const t = useTranslations("cta");
@@ -11,15 +13,14 @@ export const CTASection: React.FC = () => {
     <section className="py-12 sm:py-16">
       <Container>
         <div className="relative rounded-3xl bg-brand-darkest text-white p-8 sm:p-12 lg:p-14 overflow-hidden border border-white/10 shadow-2xl">
-          {/* Subtle glow background element */}
           <div className="absolute -top-24 -right-24 w-96 h-96 bg-brand-primary/30 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-gold-primary/20 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-3xl">
-            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-white leading-tight">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight">
               {t("bannerHeadline")}
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-white/80 leading-relaxed max-w-2xl">
+            <p className="mt-4 text-base sm:text-lg text-white/80 leading-relaxed max-w-2xl font-sans">
               {t("bannerSubline")}
             </p>
 

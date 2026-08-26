@@ -1,4 +1,5 @@
 import React from "react";
+import { setRequestLocale } from "next-intl/server";
 import { FocusLandingHero } from "@/components/focus/FocusLandingHero";
 import { FocusEcosystemIntro } from "@/components/focus/FocusEcosystemIntro";
 import { FocusDetailedGrid } from "@/components/focus/FocusDetailedGrid";
@@ -19,19 +20,18 @@ export async function generateMetadata({
   });
 }
 
-export default function FocusLandingPage() {
+export default function FocusLandingPage({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  setRequestLocale(locale);
+
   return (
     <div className="flex flex-col min-h-screen">
-      {/* 1. Hero */}
       <FocusLandingHero />
-
-      {/* 2. Integrated Ecosystem Overview */}
       <FocusEcosystemIntro />
-
-      {/* 3. Five Detailed Focus Cards Grid */}
       <FocusDetailedGrid />
-
-      {/* 4. Conversion CTA Banner */}
       <CTASection />
     </div>
   );

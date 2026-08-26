@@ -1,4 +1,5 @@
 import React from "react";
+import { setRequestLocale } from "next-intl/server";
 import { WorkHero } from "@/components/work/WorkHero";
 import { ProjectGrid } from "@/components/work/ProjectGrid";
 import { CTASection } from "@/components/shared/CTASection";
@@ -19,16 +20,17 @@ export async function generateMetadata({
   });
 }
 
-export default function WorkPage() {
+export default function WorkPage({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  setRequestLocale(locale);
+
   return (
     <div className="flex flex-col min-h-screen">
-      {/* 1. Page Hero */}
       <WorkHero />
-
-      {/* 2. Interactive Filters & Verified Project Grid / Empty State */}
       <ProjectGrid initialProjects={projects} />
-
-      {/* 3. Global Conversion Banner */}
       <CTASection />
     </div>
   );

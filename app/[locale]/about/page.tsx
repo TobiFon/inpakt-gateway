@@ -1,11 +1,12 @@
 import React from "react";
+import { setRequestLocale } from "next-intl/server";
+import { AboutHero } from "@/components/about/AboutHero";
 import { AboutMissionVision } from "@/components/about/AboutMissionVision";
 import { AboutPrinciples } from "@/components/about/AboutPrinciples";
 import { AboutConnection } from "@/components/about/AboutConnection";
 import { AboutTeamReserved } from "@/components/about/AboutTeamReserved";
 import { CTASection } from "@/components/shared/CTASection";
 import { createSiteMetadata } from "@/lib/seo";
-import { AboutHero } from "@/components/about/AboutHero";
 
 export async function generateMetadata({
   params: { locale },
@@ -21,25 +22,20 @@ export async function generateMetadata({
   });
 }
 
-export default function AboutPage() {
+export default function AboutPage({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  setRequestLocale(locale);
+
   return (
     <div className="flex flex-col min-h-screen">
-      {/* 1. Hero */}
       <AboutHero />
-
-      {/* 2. Mission & Vision */}
       <AboutMissionVision />
-
-      {/* 3. Guiding Principles */}
       <AboutPrinciples />
-
-      {/* 4. Cameroon ↔ Germany Connection Logic */}
       <AboutConnection />
-
-      {/* 5. Governance & Registered Foundation Notice */}
       <AboutTeamReserved />
-
-      {/* 6. Conversion CTA */}
       <CTASection />
     </div>
   );

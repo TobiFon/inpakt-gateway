@@ -46,7 +46,8 @@ export const FocusDetailHero: React.FC<FocusDetailHeroProps> = ({
             <Badge variant="gold" dot>
               {badgeText}
             </Badge>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+              {" "}
               {title}
             </h1>
             <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-2xl">

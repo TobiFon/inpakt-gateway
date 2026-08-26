@@ -1,5 +1,5 @@
 import React from "react";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 interface SectionHeadingProps {
   eyebrow?: string;
@@ -30,7 +30,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       {eyebrow && (
         <p
           className={cn(
-            "text-xs uppercase font-bold tracking-widest mb-2.5",
+            "text-xs uppercase font-extrabold tracking-widest mb-3",
             isDark ? "text-gold-light" : "text-gold-deep"
           )}
         >
@@ -38,16 +38,21 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
         </p>
       )}
 
+      {/* Editorial Serif Section Title */}
       <h2
         className={cn(
-          "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight leading-tight",
+          "font-serif text-2xl sm:text-4xl lg:text-[2.6rem] font-bold tracking-tight leading-[1.18]",
           isDark ? "text-white" : "text-charcoal-900"
         )}
       >
         {title}{" "}
         {highlightedWord && (
           <span
-            className={cn(isDark ? "text-gold-primary" : "text-brand-primary")}
+            className={cn(
+              isDark
+                ? "text-gold-primary italic font-normal"
+                : "text-brand-primary italic font-normal"
+            )}
           >
             {highlightedWord}
           </span>
@@ -57,7 +62,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       {description && (
         <p
           className={cn(
-            "mt-3.5 text-base sm:text-lg leading-relaxed",
+            "mt-3.5 text-base sm:text-lg leading-relaxed font-sans",
             isDark ? "text-white/70" : "text-charcoal-600"
           )}
         >

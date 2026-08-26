@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { createPortal } from "react-dom";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { usePathname, Link } from "@/i18n/routing";
 import { X, Heart, Users } from "lucide-react";
+import { allNavItems } from "@/content/navigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { Link, usePathname } from "../../i18n/routing";
-import { mainNavItems } from "../../content/navigation";
-import { cn } from "../../lib/utils";
-import { Button } from "../ui/Button";
+import { Button } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -17,53 +19,76 @@ interface MobileNavProps {
 export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
   const t = useTranslations("nav");
   const pathname = usePathname();
+  const currentPath = useRef(pathname);
+  const [mounted, setMounted] = useState(false);
 
-  // Close mobile nav automatically on route navigation
   useEffect(() => {
-    onClose();
+    setMounted(true);
+  }, []);
+
+  // Close drawer ONLY when user actually navigates to a new URL
+  useEffect(() => {
+    if (currentPath.current !== pathname) {
+      currentPath.current = pathname;
+      onClose();
+    }
   }, [pathname, onClose]);
 
-  // Prevent background scrolling when open
+  // Lock background body scroll when drawer is open
   useEffect(() => {
     if (isOpen) {
+      const prevOverflow = document.body.style.overflow;
       document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
+      return () => {
+        document.body.style.overflow = prevOverflow;
+      };
     }
-    return () => {
-      document.body.style.overflow = "unset";
-    };
   }, [isOpen]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !mounted) return null;
 
-  return (
-    <div className="fixed inset-0 z-50 lg:hidden">
-      {/* Backdrop */}
+  return createPortal(
+    <div className="fixed inset-0 z-[100] xl:hidden flex justify-end">
+      {/* Dark Backdrop */}
       <div
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* Drawer */}
-      <div className="fixed inset-y-0 right-0 w-full max-w-xs sm:max-w-sm bg-brand-darkest text-white shadow-2xl p-6 flex flex-col justify-between overflow-y-auto border-l border-white/10">
+      {/* Solid Slide-out Drawer Panel */}
+      <div className="relative w-full max-w-[320px] sm:max-w-sm h-full min-h-[100dvh] bg-[#051811] text-white shadow-2xl p-6 flex flex-col justify-between overflow-y-auto border-l border-white/10 z-10">
         <div>
-          {/* Top Row in Drawer */}
-          <div className="flex items-center justify-between pb-6 border-b border-white/10">
-            <LanguageSwitcher variant="light" />
+          {/* Top Header: Logo & Close Button */}
+          <div className="flex items-center justify-between pb-5 border-b border-white/10">
+            <Image
+              src="/logo.png"
+              alt="Impakt Gateway e.V."
+              width={160}
+              height={40}
+              className="h-8 w-auto object-contain"
+            />
             <button
+              type="button"
               onClick={onClose}
-              className="p-2 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+              className="p-2 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
               aria-label={t("closeMenu")}
             >
               <X className="w-6 h-6" />
             </button>
           </div>
 
-          {/* Navigation Links */}
-          <nav className="mt-6 flex flex-col gap-1">
-            {mainNavItems.map((item) => {
+          {/* Language Switcher in Drawer */}
+          <div className="py-3.5 border-b border-white/10 flex items-center justify-between">
+            <span className="text-xs text-white/50 uppercase tracking-wider font-semibold">
+              Language
+            </span>
+            <LanguageSwitcher variant="light" />
+          </div>
+
+          {/* Full Navigation Links */}
+          <nav className="mt-4 flex flex-col gap-1">
+            {allNavItems.map((item) => {
               const isActive =
                 item.href === "/"
                   ? pathname === "/"
@@ -73,10 +98,11 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
                 <Link
                   key={item.key}
                   href={item.href}
+                  onClick={onClose}
                   className={cn(
-                    "px-4 py-3 rounded-xl text-base font-medium transition-colors flex items-center justify-between",
+                    "px-4 py-3 rounded-xl text-sm font-medium transition-colors flex items-center justify-between",
                     isActive
-                      ? "bg-brand-primary text-gold-bright font-semibold"
+                      ? "bg-brand-primary text-gold-bright font-bold"
                       : "text-white/80 hover:bg-white/5 hover:text-white"
                   )}
                 >
@@ -90,8 +116,8 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
           </nav>
         </div>
 
-        {/* Bottom Drawer Actions */}
-        <div className="pt-6 border-t border-white/10 flex flex-col gap-3">
+        {/* Bottom Drawer Call-to-Actions */}
+        <div className="pt-6 mt-6 border-t border-white/10 flex flex-col gap-3">
           <Button
             href="/support"
             variant="gold"
@@ -112,6 +138,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
           </Button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };

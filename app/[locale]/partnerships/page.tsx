@@ -1,4 +1,5 @@
 import React from "react";
+import { setRequestLocale } from "next-intl/server";
 import { PartnershipsHero } from "@/components/partnerships/PartnershipsHero";
 import { PartnershipTypes } from "@/components/partnerships/PartnershipTypes";
 import { PartnershipValueProp } from "@/components/partnerships/PartnershipValueProp";
@@ -20,22 +21,19 @@ export async function generateMetadata({
   });
 }
 
-export default function PartnershipsPage() {
+export default function PartnershipsPage({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  setRequestLocale(locale);
+
   return (
     <div className="flex flex-col min-h-screen">
-      {/* 1. Partnerships Hero */}
       <PartnershipsHero />
-
-      {/* 2. Who Can Partner */}
       <PartnershipTypes />
-
-      {/* 3. The Value Proposition */}
       <PartnershipValueProp />
-
-      {/* 4. Interactive Partnership Enquiry Form */}
       <PartnershipForm />
-
-      {/* 5. Global Conversion Banner */}
       <CTASection />
     </div>
   );

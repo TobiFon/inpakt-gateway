@@ -1,4 +1,5 @@
 import React from "react";
+import { setRequestLocale } from "next-intl/server";
 import { SupportHero } from "@/components/support/SupportHero";
 import { SupportWhyCards } from "@/components/support/SupportWhyCards";
 import { DonationMethods } from "@/components/support/DonationMethods";
@@ -20,22 +21,19 @@ export async function generateMetadata({
   });
 }
 
-export default function SupportPage() {
+export default function SupportPage({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  setRequestLocale(locale);
+
   return (
     <div className="flex flex-col min-h-screen">
-      {/* 1. Support Hero */}
       <SupportHero />
-
-      {/* 2. What Support Enables */}
       <SupportWhyCards />
-
-      {/* 3. Direct Contribution & Bank Details Panel */}
       <DonationMethods />
-
-      {/* 4. German Non-Profit Transparency & Tax Deductibility */}
       <TransparencyPanel />
-
-      {/* 5. Global Conversion Banner */}
       <CTASection />
     </div>
   );

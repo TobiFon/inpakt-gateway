@@ -1,8 +1,9 @@
+// app/[locale]/layout.tsx
 import React from "react";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { locales, type Locale } from "@/i18n/routing";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -16,6 +17,14 @@ const sansFont = Plus_Jakarta_Sans({
   variable: "--font-sans",
   display: "swap",
   weight: ["400", "500", "600", "700", "800"],
+});
+
+const serifFont = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
+  weight: ["400", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
 });
 
 export function generateStaticParams() {
@@ -46,13 +55,16 @@ export default async function LocaleLayout({
     notFound();
   }
 
+  setRequestLocale(locale);
   const messages = await getMessages();
   const organizationJsonLd = getOrganizationSchema();
 
   return (
-    <html lang={locale} className={sansFont.variable}>
+    <html
+      lang={locale}
+      className={`${sansFont.variable} ${serifFont.variable}`}
+    >
       <head>
-        {/* Structured Schema.org JSON-LD */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

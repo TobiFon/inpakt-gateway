@@ -11,6 +11,8 @@ export const PageContainer: React.FC<PageContainerProps> = ({
   className,
 }) => {
   return (
-    <main className={cn("flex-1 w-full relative", className)}>{children}</main>
+    <main id="main-content" className={cn("flex-1 w-full relative", className)}>
+      {children}
+    </main>
   );
 };

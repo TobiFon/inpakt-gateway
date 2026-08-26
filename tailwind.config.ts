@@ -1,18 +1,17 @@
+// tailwind.config.ts
 import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./content/**/*.{js,ts,jsx,tsx,mdx}",
-    "./lib/**/*.{js,ts,jsx,tsx,mdx}",
-    "./styles/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       colors: {
         brand: {
-          darkest: "#061610",
+          darkest: "#051811",
           darker: "#09261C",
           dark: "#0E382A",
           primary: "#144D3A",
@@ -31,11 +30,11 @@ const config: Config = {
           muted: "#FFF9EE",
         },
         cream: {
-          50: "#FCFAF6",
-          100: "#F7F3EB",
-          200: "#EFE9DD",
-          300: "#E3DCCB", // Fixed typo here
-          400: "#D5CCBB",
+          50: "#FAF7F2",
+          100: "#F4EFE6",
+          200: "#EAE3D5",
+          300: "#DDD4C3",
+          border: "#E6DFC0",
         },
         charcoal: {
           900: "#101614",
@@ -49,11 +48,13 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "-apple-system", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "serif"],
+        heading: ["var(--font-serif)", "Georgia", "serif"],
       },
       maxWidth: {
-        site: "1280px",
-        content: "1040px",
-        narrow: "768px",
+        site: "1440px",
+        content: "1120px",
+        narrow: "820px",
       },
       borderRadius: {
         "2xl": "1rem",

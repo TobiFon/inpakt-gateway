@@ -1,3 +1,4 @@
+// lib/seo.ts
 import { Metadata } from "next";
 import { SITE_NAME, CONTACT_INFO, SOCIAL_LINKS } from "./constants";
 
@@ -26,6 +27,18 @@ export function createSiteMetadata({
     title: `${title} | ${SITE_NAME}`,
     description,
     metadataBase: new URL(baseUrl),
+    icons: {
+      icon: [
+        { url: "/icon.png", sizes: "32x32", type: "image/png" },
+        { url: "/icon.png", sizes: "192x192", type: "image/png" },
+        { url: "/icon.png", sizes: "512x512", type: "image/png" },
+      ],
+      apple: [
+        { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+        { url: "/icon.png", sizes: "180x180", type: "image/png" },
+      ],
+      shortcut: "/icon.png",
+    },
     alternates: {
       canonical: url,
       languages: {
@@ -71,9 +84,6 @@ export function createSiteMetadata({
   };
 }
 
-/**
- * Generates structured JSON-LD Schema.org organization metadata for search engines
- */
 export function getOrganizationSchema() {
   const baseUrl =
     process.env.NEXT_PUBLIC_SITE_URL || "https://impakt-gateway.org";
@@ -84,7 +94,7 @@ export function getOrganizationSchema() {
     name: "Impakt Gateway e.V.",
     alternateName: "Impakt Gateway",
     url: baseUrl,
-    logo: `${baseUrl}/images/branding/logo.png`,
+    logo: `${baseUrl}/logo.png`,
     email: CONTACT_INFO.email,
     description:
       "Germany-registered non-profit organization connecting Cameroon and Germany through partnerships, opportunities, resources, and sustainable development initiatives.",

@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { HeartHandshake } from "lucide-react";
 import { FocusDetailLayout } from "@/components/focus/FocusDetailLayout";
 import { createSiteMetadata } from "@/lib/seo";
+import { setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params: { locale },
@@ -18,7 +19,12 @@ export async function generateMetadata({
   });
 }
 
-export default function HealthFocusPage() {
+export default function HealthFocusPage({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  setRequestLocale(locale);
   const t = useTranslations("focusDetail.health");
 
   return (
