@@ -1,4 +1,7 @@
-import React, { ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
+"use client";
+
+import React, { ButtonHTMLAttributes, ComponentPropsWithoutRef } from "react";
+
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
@@ -9,6 +12,7 @@ type ButtonVariant =
   | "outline-light"
   | "outline-dark"
   | "ghost";
+
 type ButtonSize = "sm" | "md" | "lg";
 
 interface BaseButtonProps {
@@ -26,7 +30,7 @@ type ButtonAsButton = BaseButtonProps &
   };
 
 type ButtonAsLink = BaseButtonProps &
-  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> & {
+  Omit<ComponentPropsWithoutRef<"a">, "href"> & {
     href: string;
     external?: boolean;
   };
@@ -54,13 +58,18 @@ export const Button: React.FC<ButtonProps> = ({
   const variantStyles = {
     primary:
       "bg-brand-primary text-white hover:bg-brand-dark active:bg-brand-darkest shadow-sm hover:shadow-md",
+
     secondary:
       "bg-cream-100 text-brand-darkest hover:bg-cream-200 border border-cream-border active:bg-cream-300",
+
     gold: "bg-gold-primary text-brand-darkest font-bold hover:bg-gold-bright active:bg-gold-rich shadow-sm hover:shadow-glow",
+
     "outline-light":
       "bg-transparent text-white border border-white/30 hover:border-white/80 hover:bg-white/10 active:bg-white/15",
+
     "outline-dark":
       "bg-transparent text-brand-darkest border border-brand-dark/25 hover:border-brand-dark hover:bg-brand-subtle",
+
     ghost:
       "bg-transparent text-charcoal-700 hover:text-brand-darkest hover:bg-black/5 active:bg-black/10",
   };
@@ -77,7 +86,9 @@ export const Button: React.FC<ButtonProps> = ({
       {icon && iconPosition === "left" && (
         <span className="shrink-0">{icon}</span>
       )}
+
       <span className="whitespace-nowrap">{children}</span>
+
       {icon && iconPosition === "right" && (
         <span className="shrink-0">{icon}</span>
       )}
@@ -101,8 +112,13 @@ export const Button: React.FC<ButtonProps> = ({
       );
     }
 
+    // `Link` may use an older anchor type definition than React's
+    // current DOM types. Prevent incompatible native props from
+    // being passed through.
+    const { popover, ...safeLinkProps } = linkProps;
+
     return (
-      <Link href={href} className={classes} {...linkProps}>
+      <Link href={href} className={classes} {...safeLinkProps}>
         {content}
       </Link>
     );
