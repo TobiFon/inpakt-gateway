@@ -8,7 +8,7 @@ import { locales, type Locale } from "@/i18n/routing";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageContainer } from "@/components/layout/PageContainer";
-import { Analytics } from "@/components/analytics/Analytics";
+import { Analytics } from "@vercel/analytics/next";
 import { createSiteMetadata, getOrganizationSchema } from "@/lib/seo";
 import "@/styles/globals.css";
 
