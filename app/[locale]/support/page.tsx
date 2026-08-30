@@ -1,5 +1,5 @@
 import React from "react";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { SupportHero } from "@/components/support/SupportHero";
 import { SupportWhyCards } from "@/components/support/SupportWhyCards";
 import { DonationMethods } from "@/components/support/DonationMethods";
@@ -12,10 +12,11 @@ export async function generateMetadata({
 }: {
   params: { locale: string };
 }) {
+  const t = await getTranslations({ locale, namespace: "metadata.support" });
+
   return createSiteMetadata({
-    title: "Support Our Work",
-    description:
-      "Support Impakt Gateway e.V. with transparent financial contributions powering bilateral education, youth innovation and community impact.",
+    title: t("title"),
+    description: t("description"),
     locale,
     pathname: "/support",
   });

@@ -1,5 +1,5 @@
 import React from "react";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PartnershipsHero } from "@/components/partnerships/PartnershipsHero";
 import { PartnershipTypes } from "@/components/partnerships/PartnershipTypes";
 import { PartnershipValueProp } from "@/components/partnerships/PartnershipValueProp";
@@ -12,10 +12,14 @@ export async function generateMetadata({
 }: {
   params: { locale: string };
 }) {
+  const t = await getTranslations({
+    locale,
+    namespace: "metadata.partnerships",
+  });
+
   return createSiteMetadata({
-    title: "Partnerships & Collaboration",
-    description:
-      "Partner with Impakt Gateway e.V. to create meaningful, sustainable development initiatives between Cameroon and Germany.",
+    title: t("title"),
+    description: t("description"),
     locale,
     pathname: "/partnerships",
   });

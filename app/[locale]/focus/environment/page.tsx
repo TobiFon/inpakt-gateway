@@ -3,17 +3,21 @@ import { useTranslations } from "next-intl";
 import { Sprout } from "lucide-react";
 import { FocusDetailLayout } from "@/components/focus/FocusDetailLayout";
 import { createSiteMetadata } from "@/lib/seo";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
+  const t = await getTranslations({
+    locale,
+    namespace: "metadata.environment",
+  });
+
   return createSiteMetadata({
-    title: "Environment Focus Area",
-    description:
-      "Promoting conservation, climate resilience, and sustainable resource management.",
+    title: t("title"),
+    description: t("description"),
     locale,
     pathname: "/focus/environment",
   });

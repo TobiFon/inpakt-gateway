@@ -1,7 +1,6 @@
 "use client";
 
 import React, { ButtonHTMLAttributes, ComponentPropsWithoutRef } from "react";
-
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
@@ -47,31 +46,37 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    "inline-flex items-center justify-center font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-primary focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none rounded-full cursor-pointer tracking-normal select-none whitespace-nowrap shrink-0";
+    "inline-flex items-center justify-center font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-primary focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none rounded-full cursor-pointer tracking-normal select-none whitespace-nowrap shrink-0";
 
   const sizeStyles = {
-    sm: "text-xs px-4 py-2 gap-1.5 font-semibold",
-    md: "text-sm px-5 py-2.5 gap-2 font-semibold",
-    lg: "text-base px-7 py-3.5 gap-2.5 font-bold",
+    sm: "text-xs px-4 py-2 gap-1.5 font-bold",
+    md: "text-sm px-5 py-2.5 gap-2 font-bold",
+    lg: "text-base px-7 py-3.5 gap-2.5 font-extrabold",
   };
 
   const variantStyles = {
+    // Rich Hero Green
     primary:
-      "bg-brand-primary text-white hover:bg-brand-dark active:bg-brand-darkest shadow-sm hover:shadow-md",
+      "bg-brand-primary text-white hover:bg-brand-dark active:bg-brand-darkest shadow-sm hover:shadow-md hover:-translate-y-0.5",
 
+    // Light Neutral Card Secondary
     secondary:
-      "bg-cream-100 text-brand-darkest hover:bg-cream-200 border border-cream-border active:bg-cream-300",
+      "bg-white text-charcoal-900 hover:bg-cream-100 border border-cream-border active:bg-cream-200 shadow-xs",
 
-    gold: "bg-gold-primary text-brand-darkest font-bold hover:bg-gold-bright active:bg-gold-rich shadow-sm hover:shadow-glow",
+    // Brand Signature Warm Gold / Orange
+    gold: "bg-gold-primary text-white hover:bg-gold-deep active:bg-gold-rich shadow-sm hover:shadow-md hover:-translate-y-0.5",
 
+    // Translucent on Dark Banners
     "outline-light":
-      "bg-transparent text-white border border-white/30 hover:border-white/80 hover:bg-white/10 active:bg-white/15",
+      "bg-white/10 text-white border border-white/30 hover:border-white hover:bg-white/20 active:bg-white/25 backdrop-blur-xs",
 
+    // Outline for Clean Light Surfaces
     "outline-dark":
-      "bg-transparent text-brand-darkest border border-brand-dark/25 hover:border-brand-dark hover:bg-brand-subtle",
+      "bg-white text-charcoal-900 border border-cream-border hover:border-brand-primary hover:text-brand-primary hover:bg-brand-subtle/50 active:bg-brand-subtle shadow-xs",
 
+    // Ghost
     ghost:
-      "bg-transparent text-charcoal-700 hover:text-brand-darkest hover:bg-black/5 active:bg-black/10",
+      "bg-transparent text-charcoal-700 hover:text-brand-primary hover:bg-black/5 active:bg-black/10",
   };
 
   const classes = cn(
@@ -86,9 +91,7 @@ export const Button: React.FC<ButtonProps> = ({
       {icon && iconPosition === "left" && (
         <span className="shrink-0">{icon}</span>
       )}
-
       <span className="whitespace-nowrap">{children}</span>
-
       {icon && iconPosition === "right" && (
         <span className="shrink-0">{icon}</span>
       )}
@@ -112,9 +115,6 @@ export const Button: React.FC<ButtonProps> = ({
       );
     }
 
-    // `Link` may use an older anchor type definition than React's
-    // current DOM types. Prevent incompatible native props from
-    // being passed through.
     const { popover, ...safeLinkProps } = linkProps;
 
     return (

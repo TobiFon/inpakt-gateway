@@ -4,7 +4,10 @@ export const SUPPORTED_LOCALES = ["en", "de", "fr"] as const;
 
 export const CONTACT_INFO = {
   email: "info@impakt-gateway.org",
-  legalAddress: "Germany & Cameroon",
+  receivingEmail: "fclerencef@gmail.com",
+  legalAddress: "Impakt Gateway e.V., Deutschland",
+  germanyAddress: "Impakt Gateway e.V., Deutschland",
+  africaAddress: "Impakt Gateway Africa Liaison Network, Africa & Germany",
   registeredType: "Eingetragener Verein (e.V.)",
 } as const;
 

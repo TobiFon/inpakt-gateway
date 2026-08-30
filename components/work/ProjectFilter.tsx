@@ -28,18 +28,19 @@ export const ProjectFilters: React.FC<ProjectFiltersProps> = ({
   ];
 
   return (
-    <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 py-6">
+    <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 py-6">
       {filterOptions.map((opt) => {
         const isActive = activeCategory === opt.id;
         return (
           <button
             key={opt.id}
+            type="button"
             onClick={() => onSelectCategory(opt.id)}
             className={cn(
-              "px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer select-none",
+              "px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer select-none",
               isActive
-                ? "bg-brand-primary text-white shadow-sm"
-                : "bg-white text-charcoal-700 border border-charcoal-900/10 hover:bg-cream-100 hover:text-brand-dark"
+                ? "bg-brand-primary text-white shadow-sm border border-brand-primary"
+                : "bg-white text-charcoal-700 border border-cream-border hover:bg-cream-100 hover:text-brand-primary hover:border-brand-primary/40 shadow-xs"
             )}
           >
             {t(opt.labelKey)}

@@ -9,10 +9,10 @@ export const WorkEmptyState: React.FC = () => {
 
   return (
     <Card
-      variant="white"
-      className="p-8 sm:p-14 text-center max-w-3xl mx-auto border border-charcoal-900/5 shadow-card"
+      variant="gold-accent"
+      className="p-8 sm:p-14 text-center max-w-3xl mx-auto border border-cream-border shadow-card"
     >
-      <div className="w-16 h-16 rounded-3xl bg-gold-warm text-gold-deep flex items-center justify-center mx-auto mb-6 shadow-sm">
+      <div className="w-16 h-16 rounded-3xl bg-gold-warm text-gold-deep border border-gold-border flex items-center justify-center mx-auto mb-6 shadow-xs">
         <Sparkles className="w-8 h-8" />
       </div>
 
@@ -20,7 +20,7 @@ export const WorkEmptyState: React.FC = () => {
         {t("emptyBadge")}
       </span>
 
-      <h2 className="mt-2 text-2xl sm:text-3xl font-extrabold text-charcoal-900 tracking-tight">
+      <h2 className="mt-2 font-serif text-2xl sm:text-3xl font-extrabold text-charcoal-900 tracking-tight">
         {t("emptyTitle")}
       </h2>
 
@@ -43,9 +43,9 @@ export const WorkEmptyState: React.FC = () => {
         </Button>
         <Button
           href="/support"
-          variant="secondary"
+          variant="gold"
           size="md"
-          icon={<Heart className="w-4 h-4 fill-current text-gold-deep" />}
+          icon={<Heart className="w-4 h-4 fill-current text-white" />}
         >
           {t("supportCta")}
         </Button>

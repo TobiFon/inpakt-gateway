@@ -63,7 +63,7 @@ export const FocusDetailedGrid: React.FC = () => {
   ];
 
   return (
-    <section className="py-12 sm:py-16 bg-cream-50">
+    <section className="py-12 sm:py-16 bg-cream-50/50">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {focusData.map((item) => (

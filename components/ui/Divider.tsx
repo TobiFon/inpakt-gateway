@@ -1,9 +1,9 @@
 import React from "react";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 interface DividerProps {
   className?: string;
-  variant?: "subtle" | "gold" | "dark";
+  variant?: "subtle" | "gold" | "green";
 }
 
 export const Divider: React.FC<DividerProps> = ({
@@ -12,8 +12,8 @@ export const Divider: React.FC<DividerProps> = ({
 }) => {
   const variantStyles = {
     subtle: "border-cream-border",
-    gold: "border-gold-primary/30",
-    dark: "border-white/10",
+    gold: "border-gold-border",
+    green: "border-brand-border",
   };
 
   return (

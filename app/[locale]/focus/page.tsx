@@ -1,8 +1,6 @@
 import React from "react";
-import { setRequestLocale } from "next-intl/server";
-import { FocusLandingHero } from "@/components/focus/FocusLandingHero";
-import { FocusEcosystemIntro } from "@/components/focus/FocusEcosystemIntro";
-import { FocusDetailedGrid } from "@/components/focus/FocusDetailedGrid";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { SustainableDevelopmentFocus } from "@/components/focus/SustainableDevelopmentFocus";
 import { CTASection } from "@/components/shared/CTASection";
 import { createSiteMetadata } from "@/lib/seo";
 
@@ -11,10 +9,11 @@ export async function generateMetadata({
 }: {
   params: { locale: string };
 }) {
+  const t = await getTranslations({ locale, namespace: "metadata.focus" });
+
   return createSiteMetadata({
-    title: "Our Focus Areas",
-    description:
-      "Explore Impakt Gateway e.V.’s five key areas of impact: Education, Youth, Health, Environment, and Humanitarian Support.",
+    title: t("title"),
+    description: t("description"),
     locale,
     pathname: "/focus",
   });
@@ -29,9 +28,7 @@ export default function FocusLandingPage({
 
   return (
     <div className="flex flex-col min-h-screen">
-      <FocusLandingHero />
-      <FocusEcosystemIntro />
-      <FocusDetailedGrid />
+      <SustainableDevelopmentFocus />
       <CTASection />
     </div>
   );

@@ -15,7 +15,7 @@ export const AboutConnection: React.FC = () => {
     t("germanyItem4"),
   ];
 
-  const cameroonPoints = [
+  const africaPoints = [
     t("cameroonItem1"),
     t("cameroonItem2"),
     t("cameroonItem3"),
@@ -23,7 +23,7 @@ export const AboutConnection: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-20 bg-cream-50">
+    <section className="py-16 sm:py-24 bg-cream-50/50">
       <Container>
         <SectionHeading
           eyebrow={t("connectionEyebrow")}
@@ -36,16 +36,16 @@ export const AboutConnection: React.FC = () => {
           <div className="lg:col-span-5">
             <Card
               variant="white"
-              className="p-7 sm:p-8 border border-charcoal-900/5 shadow-card hover:border-gold-primary/40"
+              className="p-7 sm:p-8 border border-cream-border shadow-card hover:border-gold-primary/60"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-warm text-gold-deep text-xs font-bold uppercase tracking-wider mb-5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-warm text-gold-deep border border-gold-border text-xs font-bold uppercase tracking-wider mb-5">
                 <span>🇩🇪</span> {t("germanyCardTitle")}
               </div>
               <ul className="space-y-3.5">
                 {germanyPoints.map((point, idx) => (
                   <li
                     key={idx}
-                    className="flex items-start gap-3 text-sm text-charcoal-700"
+                    className="flex items-start gap-3 text-sm text-charcoal-700 font-medium"
                   >
                     <CheckCircle2 className="w-4 h-4 text-gold-primary shrink-0 mt-0.5" />
                     <span>{point}</span>
@@ -55,29 +55,29 @@ export const AboutConnection: React.FC = () => {
             </Card>
           </div>
 
-          {/* Central Exchange Indicator */}
+          {/* Central Exchange Flow Indicator */}
           <div className="lg:col-span-1 flex items-center justify-center py-2">
-            <div className="w-12 h-12 rounded-full bg-brand-primary text-gold-light flex items-center justify-center shadow-glow">
-              <ArrowLeftRight className="w-5 h-5" />
+            <div className="w-12 h-12 rounded-full bg-brand-darkest text-white flex items-center justify-center shadow-lg border-2 border-white">
+              <ArrowLeftRight className="w-5 h-5 text-gold-bright" />
             </div>
           </div>
 
-          {/* Cameroon Column */}
+          {/* Africa Column */}
           <div className="lg:col-span-5">
             <Card
               variant="white"
-              className="p-7 sm:p-8 border border-charcoal-900/5 shadow-card hover:border-brand-primary/40"
+              className="p-7 sm:p-8 border border-cream-border shadow-card hover:border-brand-primary/60"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-subtle text-brand-dark text-xs font-bold uppercase tracking-wider mb-5">
-                <span>🇨🇲</span> {t("cameroonCardTitle")}
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-subtle text-brand-darkest border border-brand-border text-xs font-bold uppercase tracking-wider mb-5">
+                <span>🌍</span> {t("cameroonCardTitle")}
               </div>
               <ul className="space-y-3.5">
-                {cameroonPoints.map((point, idx) => (
+                {africaPoints.map((point, idx) => (
                   <li
                     key={idx}
-                    className="flex items-start gap-3 text-sm text-charcoal-700"
+                    className="flex items-start gap-3 text-sm text-charcoal-700 font-medium"
                   >
-                    <CheckCircle2 className="w-4 h-4 text-brand-medium shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-brand-primary shrink-0 mt-0.5" />
                     <span>{point}</span>
                   </li>
                 ))}

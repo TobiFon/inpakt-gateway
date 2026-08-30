@@ -24,58 +24,58 @@ export const ProjectDetailSidebar: React.FC<ProjectDetailSidebarProps> = ({
     <div className="space-y-6">
       <Card
         variant="white"
-        className="p-6 sm:p-8 border border-charcoal-900/5 shadow-card"
+        className="p-6 sm:p-8 border border-cream-border shadow-card"
       >
-        <h3 className="text-base font-bold text-charcoal-900 mb-5">
+        <h3 className="text-base font-bold text-charcoal-900 mb-5 pb-3 border-b border-cream-border">
           {t("sidebarDetails")}
         </h3>
 
         <div className="space-y-4 text-sm">
-          {/* Location item */}
-          <div className="flex items-start gap-3 pb-3 border-b border-charcoal-900/5">
-            <MapPin className="w-4 h-4 text-gold-deep shrink-0 mt-0.5" />
+          {/* Location */}
+          <div className="flex items-start gap-3 pb-3 border-b border-cream-border">
+            <MapPin className="w-4 h-4 text-gold-primary shrink-0 mt-0.5" />
             <div>
-              <span className="text-xs text-charcoal-500 block">
+              <span className="text-xs text-charcoal-500 block font-semibold">
                 {t("sidebarLocation")}
               </span>
-              <span className="font-semibold text-charcoal-900">
+              <span className="font-bold text-charcoal-900">
                 {project.location}
               </span>
             </div>
           </div>
 
-          {/* Status item */}
-          <div className="flex items-start gap-3 pb-3 border-b border-charcoal-900/5">
-            <Activity className="w-4 h-4 text-brand-medium shrink-0 mt-0.5" />
+          {/* Status */}
+          <div className="flex items-start gap-3 pb-3 border-b border-cream-border">
+            <Activity className="w-4 h-4 text-brand-primary shrink-0 mt-0.5" />
             <div>
-              <span className="text-xs text-charcoal-500 block">
+              <span className="text-xs text-charcoal-500 block font-semibold">
                 {t("sidebarStatus")}
               </span>
-              <span className="font-semibold text-charcoal-900">
+              <span className="font-bold text-charcoal-900">
                 {statusLabels[project.status]}
               </span>
             </div>
           </div>
 
-          {/* Focus area item */}
-          <div className="flex items-start gap-3 pb-3 border-b border-charcoal-900/5">
-            <Layers className="w-4 h-4 text-brand-dark shrink-0 mt-0.5" />
+          {/* Focus Area */}
+          <div className="flex items-start gap-3 pb-3 border-b border-cream-border">
+            <Layers className="w-4 h-4 text-brand-darkest shrink-0 mt-0.5" />
             <div>
-              <span className="text-xs text-charcoal-500 block">
+              <span className="text-xs text-charcoal-500 block font-semibold">
                 {t("sidebarFocus")}
               </span>
-              <span className="font-semibold text-charcoal-900 capitalize">
+              <span className="font-bold text-charcoal-900 capitalize">
                 {project.focusArea}
               </span>
             </div>
           </div>
 
-          {/* Participating partners (if available) */}
+          {/* Partners */}
           {project.partners && project.partners.length > 0 && (
             <div className="flex items-start gap-3">
               <Handshake className="w-4 h-4 text-gold-primary shrink-0 mt-0.5" />
               <div>
-                <span className="text-xs text-charcoal-500 block">
+                <span className="text-xs text-charcoal-500 block font-semibold">
                   {t("sidebarPartners")}
                 </span>
                 <ul className="mt-1 space-y-1 font-medium text-charcoal-800">
@@ -89,22 +89,22 @@ export const ProjectDetailSidebar: React.FC<ProjectDetailSidebarProps> = ({
         </div>
 
         {/* Action CTAs */}
-        <div className="mt-8 pt-6 border-t border-charcoal-900/5 space-y-3">
+        <div className="mt-8 pt-6 border-t border-cream-border space-y-3">
           <Button
             href="/support"
             variant="gold"
             size="md"
-            className="w-full"
-            icon={<Heart className="w-4 h-4 fill-current text-brand-darkest" />}
+            className="w-full shadow-xs"
+            icon={<Heart className="w-4 h-4 fill-current text-white" />}
           >
             {t("supportThisProject")}
           </Button>
           <Button
             href="/partnerships"
-            variant="secondary"
+            variant="outline-dark"
             size="md"
             className="w-full"
-            icon={<Handshake className="w-4 h-4" />}
+            icon={<Handshake className="w-4 h-4 text-brand-primary" />}
           >
             {t("partnerOnThis")}
           </Button>

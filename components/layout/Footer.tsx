@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -14,10 +16,17 @@ export const Footer: React.FC = () => {
   const tFocus = useTranslations();
   const tFooter = useTranslations("footer");
 
+  const openCookieSettings = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("open-cookie-settings"));
+    }
+  };
+
   return (
-    <footer className="bg-brand-darkest text-white/80 pt-14 sm:pt-16 pb-12 border-t border-white/10 mt-auto overflow-hidden">
+    <footer className="bg-white text-charcoal-700 pt-16 pb-12 border-t border-cream-border mt-auto overflow-hidden">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8 pb-12 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-cream-border">
           {/* Brand Column */}
           <div className="lg:col-span-4 flex flex-col justify-between">
             <div>
@@ -27,33 +36,35 @@ export const Footer: React.FC = () => {
                   alt="Impakt Gateway e.V."
                   width={220}
                   height={56}
-                  className="h-8 sm:h-9 md:h-10 w-auto object-contain transition-opacity group-hover:opacity-90"
+                  className="h-9 sm:h-10 w-auto object-contain transition-opacity group-hover:opacity-90"
                 />
               </Link>
 
-              <p className="mt-2 text-sm text-white/70 leading-relaxed max-w-sm">
+              <p className="mt-2 text-sm text-charcoal-600 leading-relaxed max-w-sm">
                 {tFooter("aboutOrg")}
               </p>
             </div>
 
-            <div className="mt-5 flex items-center gap-3">
-              <span className="text-xs text-white/50">
+            <div className="mt-6 flex items-center gap-2 px-3 py-1.5 rounded-full bg-cream-50 border border-cream-border w-fit">
+              <span className="w-2 h-2 rounded-full bg-gold-primary shrink-0" />
+              <span className="text-xs text-charcoal-600 font-semibold">
                 {tFooter("registeredInfo")}
               </span>
             </div>
           </div>
 
-          {/* Quick Navigation Column (All Items) */}
+          {/* Quick Navigation */}
           <div className="lg:col-span-2">
-            <h3 className="text-xs uppercase font-bold tracking-widest text-gold-light mb-4">
+            <h3 className="text-xs uppercase font-extrabold tracking-widest text-brand-primary mb-4 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-gold-primary" />
               {tFooter("navigationTitle")}
             </h3>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2.5 text-sm font-medium">
               {allNavItems.map((item) => (
                 <li key={item.key}>
                   <Link
                     href={item.href}
-                    className="text-white/70 hover:text-white transition-colors block py-0.5"
+                    className="text-charcoal-600 hover:text-brand-primary transition-colors block py-0.5"
                   >
                     {tNav(item.key)}
                   </Link>
@@ -62,17 +73,18 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Focus Areas Column */}
+          {/* Focus Areas */}
           <div className="lg:col-span-3">
-            <h3 className="text-xs uppercase font-bold tracking-widest text-gold-light mb-4">
+            <h3 className="text-xs uppercase font-extrabold tracking-widest text-brand-primary mb-4 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-gold-primary" />
               {tFooter("focusTitle")}
             </h3>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2.5 text-sm font-medium">
               {focusAreas.map((area) => (
                 <li key={area.id}>
                   <Link
                     href={area.slug}
-                    className="text-white/70 hover:text-white transition-colors block py-0.5"
+                    className="text-charcoal-600 hover:text-brand-primary transition-colors block py-0.5"
                   >
                     {tFocus(area.titleKey)}
                   </Link>
@@ -81,66 +93,66 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Contact & Geography Column */}
+          {/* Contact & Presence */}
           <div className="lg:col-span-3">
-            <h3 className="text-xs uppercase font-bold tracking-widest text-gold-light mb-4">
+            <h3 className="text-xs uppercase font-extrabold tracking-widest text-brand-primary mb-4 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-gold-primary" />
               {tFooter("contactTitle")}
             </h3>
-            <div className="space-y-2.5 text-sm text-white/70">
-              <div className="flex items-center gap-2.5">
-                <MapPin className="w-4 h-4 text-gold-primary shrink-0" />
-                <span className="whitespace-nowrap">
-                  {tFooter("locations")}
-                </span>
+            <div className="space-y-3 text-sm text-charcoal-600 font-medium">
+              <div className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-gold-primary shrink-0 mt-0.5" />
+                <span>{tFooter("locations")}</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-gold-primary shrink-0" />
+                <Mail className="w-4 h-4 text-brand-primary shrink-0" />
                 <a
                   href={`mailto:${CONTACT_INFO.email}`}
-                  className="hover:text-white transition-colors break-all"
+                  className="hover:text-brand-primary font-semibold text-charcoal-800 transition-colors break-all"
                 >
                   {CONTACT_INFO.email}
                 </a>
               </div>
             </div>
 
-            <div className="mt-5">
-              <span className="text-xs text-white/50 block mb-2 font-medium">
-                Follow Us
+            <div className="mt-6">
+              <span className="text-xs text-charcoal-500 block mb-2 font-bold uppercase tracking-wider">
+                {tFooter("followNetwork")}
               </span>
-              <SocialLinks variant="light" size="sm" />
+              <SocialLinks variant="brand" size="sm" />
             </div>
           </div>
         </div>
 
-        {/* Bottom Strip */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/50 text-center md:text-left">
+        {/* Bottom Bar */}
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-charcoal-500 text-center md:text-left font-medium">
           <p>
             &copy; {new Date().getFullYear()} Impakt Gateway e.V.{" "}
             {tFooter("copyright")}
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
             <Link
               href="/legal/impressum"
-              className="hover:text-white transition-colors"
+              className="hover:text-brand-primary transition-colors"
             >
               {tFooter("impressum")}
             </Link>
             <Link
               href="/legal/privacy"
-              className="hover:text-white transition-colors"
+              className="hover:text-brand-primary transition-colors"
             >
               {tFooter("privacy")}
             </Link>
-            <Link
-              href="/legal/cookies"
-              className="hover:text-white transition-colors"
+            <button
+              type="button"
+              onClick={openCookieSettings}
+              className="hover:text-brand-primary transition-colors cursor-pointer"
             >
               {tFooter("cookies")}
-            </Link>
-            <div className="hidden sm:block border-l border-white/20 pl-3">
-              <LanguageSwitcher variant="light" />
+            </button>
+            <div className="hidden sm:block border-l border-cream-border pl-4">
+              <LanguageSwitcher variant="dark" />
             </div>
           </div>
         </div>

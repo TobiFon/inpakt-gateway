@@ -3,17 +3,18 @@ import { useTranslations } from "next-intl";
 import { Users } from "lucide-react";
 import { FocusDetailLayout } from "@/components/focus/FocusDetailLayout";
 import { createSiteMetadata } from "@/lib/seo";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
+  const t = await getTranslations({ locale, namespace: "metadata.youth" });
+
   return createSiteMetadata({
-    title: "Youth Focus Area",
-    description:
-      "Empowering young talent with practical skills, entrepreneurship mentorship and cross-border opportunities.",
+    title: t("title"),
+    description: t("description"),
     locale,
     pathname: "/focus/youth",
   });

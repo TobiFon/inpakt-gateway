@@ -3,17 +3,18 @@ import { useTranslations } from "next-intl";
 import { HeartHandshake } from "lucide-react";
 import { FocusDetailLayout } from "@/components/focus/FocusDetailLayout";
 import { createSiteMetadata } from "@/lib/seo";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
+  const t = await getTranslations({ locale, namespace: "metadata.health" });
+
   return createSiteMetadata({
-    title: "Health Focus Area",
-    description:
-      "Improving access to essential healthcare and fostering professional medical knowledge exchange.",
+    title: t("title"),
+    description: t("description"),
     locale,
     pathname: "/focus/health",
   });

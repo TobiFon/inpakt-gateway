@@ -18,6 +18,7 @@ export const FocusGrid: React.FC = () => {
   const focusData = [
     {
       id: "education",
+      index: "01",
       title: tFocus("education"),
       desc: tFocus("educationDesc"),
       href: "/focus/education",
@@ -25,6 +26,7 @@ export const FocusGrid: React.FC = () => {
     },
     {
       id: "youth",
+      index: "02",
       title: tFocus("youth"),
       desc: tFocus("youthDesc"),
       href: "/focus/youth",
@@ -32,6 +34,7 @@ export const FocusGrid: React.FC = () => {
     },
     {
       id: "health",
+      index: "03",
       title: tFocus("health"),
       desc: tFocus("healthDesc"),
       href: "/focus/health",
@@ -39,6 +42,7 @@ export const FocusGrid: React.FC = () => {
     },
     {
       id: "environment",
+      index: "04",
       title: tFocus("environment"),
       desc: tFocus("environmentDesc"),
       href: "/focus/environment",
@@ -46,6 +50,7 @@ export const FocusGrid: React.FC = () => {
     },
     {
       id: "humanitarian",
+      index: "05",
       title: tFocus("humanitarian"),
       desc: tFocus("humanitarianDesc"),
       href: "/focus/humanitarian-support",
@@ -54,7 +59,7 @@ export const FocusGrid: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-20 bg-cream-50">
+    <section className="py-16 sm:py-24 bg-cream-50/50 border-b border-cream-border">
       <Container>
         <SectionHeading
           eyebrow={tSec("eyebrow")}
@@ -66,6 +71,7 @@ export const FocusGrid: React.FC = () => {
           {focusData.map((item) => (
             <FocusCard
               key={item.id}
+              index={item.index}
               title={item.title}
               description={item.desc}
               href={item.href}

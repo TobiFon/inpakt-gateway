@@ -11,11 +11,11 @@ export const PayPalCard: React.FC = () => {
   return (
     <Card
       variant="white"
-      className="p-8 sm:p-10 border border-charcoal-900/5 shadow-card h-full flex flex-col justify-between"
+      className="p-8 sm:p-10 border border-cream-border shadow-card h-full flex flex-col justify-between"
     >
       <div>
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-12 h-12 rounded-2xl bg-gold-warm text-gold-deep flex items-center justify-center">
+          <div className="w-12 h-12 rounded-2xl bg-gold-warm text-gold-deep border border-gold-border flex items-center justify-center shadow-xs">
             <CreditCard className="w-6 h-6" />
           </div>
           <h3 className="text-xl font-bold text-charcoal-900">
@@ -23,7 +23,7 @@ export const PayPalCard: React.FC = () => {
           </h3>
         </div>
 
-        <p className="text-xs sm:text-sm text-charcoal-600 leading-relaxed mb-6">
+        <p className="text-xs sm:text-sm text-charcoal-600 leading-relaxed mb-6 font-normal">
           {t("paypalDesc")}
         </p>
 
@@ -31,18 +31,18 @@ export const PayPalCard: React.FC = () => {
           <span className="font-bold text-charcoal-900 block">
             {t("futurePaymentsTitle")}
           </span>
-          <p>{t("futurePaymentsDesc")}</p>
+          <p className="font-normal">{t("futurePaymentsDesc")}</p>
         </div>
       </div>
 
-      <div className="mt-6 pt-4 border-t border-charcoal-900/5">
+      <div className="mt-6 pt-4 border-t border-cream-border">
         <Button
           href={donationConfig.paypalDonationUrl || "https://paypal.me"}
           external
           variant="gold"
           size="md"
-          className="w-full"
-          icon={<Heart className="w-4 h-4 fill-current text-brand-darkest" />}
+          className="w-full shadow-xs"
+          icon={<Heart className="w-4 h-4 fill-current text-white" />}
         >
           {t("paypalButton")}
         </Button>

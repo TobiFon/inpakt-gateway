@@ -26,7 +26,6 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
     setMounted(true);
   }, []);
 
-  // Close drawer ONLY when user actually navigates to a new URL
   useEffect(() => {
     if (currentPath.current !== pathname) {
       currentPath.current = pathname;
@@ -34,7 +33,6 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
     }
   }, [pathname, onClose]);
 
-  // Lock background body scroll when drawer is open
   useEffect(() => {
     if (isOpen) {
       const prevOverflow = document.body.style.overflow;
@@ -51,16 +49,16 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
     <div className="fixed inset-0 z-[100] xl:hidden flex justify-end">
       {/* Dark Backdrop */}
       <div
-        className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-brand-darkest/75 backdrop-blur-xs transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* Solid Slide-out Drawer Panel */}
-      <div className="relative w-full max-w-[320px] sm:max-w-sm h-full min-h-[100dvh] bg-[#051811] text-white shadow-2xl p-6 flex flex-col justify-between overflow-y-auto border-l border-white/10 z-10">
+      {/* Slide-out Drawer Panel */}
+      <div className="relative w-full max-w-[320px] sm:max-w-sm h-full min-h-[100dvh] bg-white text-charcoal-900 shadow-2xl p-6 flex flex-col justify-between overflow-y-auto border-l border-cream-border z-10">
         <div>
-          {/* Top Header: Logo & Close Button */}
-          <div className="flex items-center justify-between pb-5 border-b border-white/10">
+          {/* Header */}
+          <div className="flex items-center justify-between pb-5 border-b border-cream-border">
             <Image
               src="/logo.png"
               alt="Impakt Gateway e.V."
@@ -71,23 +69,23 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
             <button
               type="button"
               onClick={onClose}
-              className="p-2 rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              className="p-2 rounded-full text-charcoal-600 hover:text-charcoal-900 hover:bg-cream-100 transition-colors cursor-pointer border border-cream-border"
               aria-label={t("closeMenu")}
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
             </button>
           </div>
 
-          {/* Language Switcher in Drawer */}
-          <div className="py-3.5 border-b border-white/10 flex items-center justify-between">
-            <span className="text-xs text-white/50 uppercase tracking-wider font-semibold">
+          {/* Language Selector */}
+          <div className="py-4 border-b border-cream-border flex items-center justify-between">
+            <span className="text-xs text-charcoal-500 uppercase tracking-wider font-bold">
               Language
             </span>
-            <LanguageSwitcher variant="light" />
+            <LanguageSwitcher variant="dark" />
           </div>
 
-          {/* Full Navigation Links */}
-          <nav className="mt-4 flex flex-col gap-1">
+          {/* Navigation Links */}
+          <nav className="mt-4 flex flex-col gap-1.5">
             {allNavItems.map((item) => {
               const isActive =
                 item.href === "/"
@@ -100,15 +98,15 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
                   href={item.href}
                   onClick={onClose}
                   className={cn(
-                    "px-4 py-3 rounded-xl text-sm font-medium transition-colors flex items-center justify-between",
+                    "px-4 py-3 rounded-2xl text-sm font-semibold transition-all flex items-center justify-between",
                     isActive
-                      ? "bg-brand-primary text-gold-bright font-bold"
-                      : "text-white/80 hover:bg-white/5 hover:text-white"
+                      ? "bg-brand-subtle text-brand-darkest font-bold border border-brand-border shadow-xs"
+                      : "text-charcoal-700 hover:bg-cream-100 hover:text-brand-primary"
                   )}
                 >
                   <span>{t(item.key)}</span>
                   {isActive && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-gold-primary" />
+                    <span className="w-2 h-2 rounded-full bg-gold-primary" />
                   )}
                 </Link>
               );
@@ -116,23 +114,23 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose }) => {
           </nav>
         </div>
 
-        {/* Bottom Drawer Call-to-Actions */}
-        <div className="pt-6 mt-6 border-t border-white/10 flex flex-col gap-3">
+        {/* Drawer CTAs */}
+        <div className="pt-6 mt-6 border-t border-cream-border flex flex-col gap-3">
           <Button
             href="/support"
             variant="gold"
             size="md"
-            className="w-full"
-            icon={<Heart className="w-4 h-4 fill-current text-brand-darkest" />}
+            className="w-full shadow-md"
+            icon={<Heart className="w-4 h-4 fill-current text-white" />}
           >
             {t("supportButton")}
           </Button>
           <Button
             href="/partnerships"
-            variant="outline-light"
+            variant="outline-dark"
             size="md"
             className="w-full"
-            icon={<Users className="w-4 h-4" />}
+            icon={<Users className="w-4 h-4 text-brand-primary" />}
           >
             {t("partnerButton")}
           </Button>

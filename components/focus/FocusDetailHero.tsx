@@ -21,16 +21,17 @@ export const FocusDetailHero: React.FC<FocusDetailHeroProps> = ({
   const t = useTranslations("focusDetail");
 
   return (
-    <section className="relative bg-brand-darkest text-white pt-12 sm:pt-16 pb-16 sm:pb-20 overflow-hidden border-b border-white/10">
-      {/* Glow Effect */}
-      <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-brand-primary/25 rounded-full blur-[100px] pointer-events-none" />
+    <section className="relative bg-gradient-to-b from-brand-subtle/60 via-white to-cream-50 text-charcoal-900 pt-12 sm:pt-16 pb-16 sm:pb-20 overflow-hidden border-b border-cream-border">
+      {/* Ambient Lighting */}
+      <div className="absolute -top-20 left-[20%] w-[500px] h-[350px] bg-brand-primary/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute -top-20 right-[20%] w-[450px] h-[350px] bg-gold-primary/15 rounded-full blur-[120px] pointer-events-none" />
 
       <Container size="content">
         {/* Back Link */}
         <div className="mb-6">
           <Link
             href="/focus"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-white/70 hover:text-gold-light transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-bold text-brand-darkest hover:text-brand-primary transition-colors bg-white px-3.5 py-1.5 rounded-full border border-cream-border shadow-xs"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>{t("backLink")}</span>
@@ -38,7 +39,7 @@ export const FocusDetailHero: React.FC<FocusDetailHeroProps> = ({
         </div>
 
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-          <div className="w-16 h-16 rounded-2xl bg-brand-primary text-gold-light flex items-center justify-center shrink-0 shadow-glow">
+          <div className="w-16 h-16 rounded-2xl bg-brand-subtle text-brand-primary flex items-center justify-center shrink-0 shadow-sm border border-brand-border">
             <Icon className="w-8 h-8" />
           </div>
 
@@ -46,11 +47,10 @@ export const FocusDetailHero: React.FC<FocusDetailHeroProps> = ({
             <Badge variant="gold" dot>
               {badgeText}
             </Badge>
-            <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
-              {" "}
+            <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold text-charcoal-900 tracking-tight leading-tight">
               {title}
             </h1>
-            <p className="text-base sm:text-lg text-white/80 leading-relaxed max-w-2xl">
+            <p className="text-base sm:text-lg text-charcoal-600 leading-relaxed max-w-2xl font-medium">
               {subtitle}
             </p>
           </div>

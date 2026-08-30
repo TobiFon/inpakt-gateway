@@ -26,9 +26,9 @@ export default async function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "60px 80px",
-          backgroundColor: "#051811",
+          backgroundColor: "#0c3323",
           backgroundImage:
-            "radial-gradient(circle at 85% 25%, rgba(217, 146, 39, 0.28), transparent 50%), radial-gradient(circle at 15% 80%, rgba(20, 77, 58, 0.45), transparent 50%)",
+            "radial-gradient(circle at 85% 25%, rgba(217, 146, 39, 0.32), transparent 50%), radial-gradient(circle at 15% 80%, rgba(21, 128, 61, 0.5), transparent 50%)",
           color: "#ffffff",
           fontFamily: "system-ui, sans-serif",
         }}
@@ -61,18 +61,18 @@ export default async function OpenGraphImage() {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "8px",
-              backgroundColor: "rgba(255, 255, 255, 0.08)",
-              padding: "8px 18px",
+              gap: "10px",
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              padding: "10px 20px",
               borderRadius: "9999px",
-              border: "1px solid rgba(255, 255, 255, 0.15)",
+              border: "1px solid rgba(243, 184, 74, 0.3)",
               fontSize: "14px",
-              fontWeight: 700,
-              color: "#F3B84A",
+              fontWeight: 800,
+              color: "#f3b84a",
               letterSpacing: "1px",
             }}
           >
-            <span>CAMEROON 🇨🇲</span>
+            <span>AFRICA 🌍</span>
             <span style={{ color: "#ffffff", opacity: 0.6 }}>↔</span>
             <span>GERMANY 🇩🇪</span>
           </div>
@@ -84,14 +84,14 @@ export default async function OpenGraphImage() {
             display: "flex",
             flexDirection: "column",
             gap: "16px",
-            maxWidth: "960px",
+            maxWidth: "980px",
           }}
         >
           <div
             style={{
               fontSize: "14px",
               fontWeight: 800,
-              color: "#E5A338",
+              color: "#f3b84a",
               letterSpacing: "3px",
               textTransform: "uppercase",
             }}
@@ -99,7 +99,6 @@ export default async function OpenGraphImage() {
             Connect. Collaborate. Create Impact.
           </div>
 
-          {/* Flex title container with explicit 14px gap */}
           <div
             style={{
               display: "flex",
@@ -124,7 +123,7 @@ export default async function OpenGraphImage() {
               style={{
                 fontSize: "58px",
                 fontWeight: 900,
-                color: "#D99227",
+                color: "#d99227",
                 letterSpacing: "-1px",
               }}
             >
@@ -135,15 +134,15 @@ export default async function OpenGraphImage() {
           <p
             style={{
               fontSize: "21px",
-              color: "#EBF4F0",
-              opacity: 0.88,
+              color: "#f0fdf4",
+              opacity: 0.9,
               margin: 0,
               lineHeight: 1.45,
-              maxWidth: "850px",
+              maxWidth: "860px",
             }}
           >
             Connecting people, institutions, resources and opportunities across
-            Cameroon and Germany for sustainable development.
+            Africa and Germany for sustainable development.
           </p>
         </div>
 
@@ -153,14 +152,14 @@ export default async function OpenGraphImage() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            borderTop: "1px solid rgba(255, 255, 255, 0.12)",
+            borderTop: "1px solid rgba(255, 255, 255, 0.15)",
             paddingTop: "20px",
           }}
         >
-          <span style={{ fontSize: "15px", color: "#B8C4BF" }}>
-            Registered Non-Profit Association (e.V.) • Germany & Cameroon
+          <span style={{ fontSize: "15px", color: "#cbd5d0" }}>
+            Registered Non-Profit Association (e.V.) • Germany & Africa
           </span>
-          <span style={{ fontSize: "16px", color: "#F3B84A", fontWeight: 800 }}>
+          <span style={{ fontSize: "16px", color: "#f3b84a", fontWeight: 800 }}>
             impakt-gateway.org
           </span>
         </div>

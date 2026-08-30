@@ -27,15 +27,15 @@ export const FocusDetailedCard: React.FC<FocusDetailedCardProps> = ({
   return (
     <Card
       variant="white"
-      className="p-8 sm:p-10 border border-charcoal-900/5 shadow-card hover:border-brand-primary/30 flex flex-col justify-between group transition-all duration-300"
+      className="p-8 sm:p-10 border border-cream-border shadow-card hover:border-brand-primary/40 flex flex-col justify-between group transition-all duration-300"
     >
       <div>
-        {/* Card Header Row */}
+        {/* Header Row */}
         <div className="flex items-center justify-between mb-6">
-          <div className="w-14 h-14 rounded-2xl bg-brand-subtle text-brand-dark flex items-center justify-center group-hover:bg-brand-primary group-hover:text-white transition-colors duration-200 shadow-sm">
+          <div className="w-14 h-14 rounded-2xl bg-brand-subtle text-brand-primary border border-brand-border flex items-center justify-center group-hover:bg-brand-primary group-hover:text-white transition-colors duration-200 shadow-xs">
             <Icon className="w-7 h-7" />
           </div>
-          <span className="text-xs font-bold text-gold-deep bg-gold-warm px-3 py-1 rounded-full">
+          <span className="text-xs font-bold text-gold-deep bg-gold-warm border border-gold-border px-3 py-1 rounded-full">
             {badgeIndex}
           </span>
         </div>
@@ -49,16 +49,16 @@ export const FocusDetailedCard: React.FC<FocusDetailedCardProps> = ({
         </p>
 
         {/* Thematic Bullet Pill */}
-        <div className="p-4 rounded-xl bg-cream-50 border border-cream-border text-xs text-charcoal-700 leading-relaxed font-medium">
+        <div className="p-4 rounded-2xl bg-cream-50 border border-cream-border text-xs text-charcoal-700 leading-relaxed font-medium">
           {thematicText}
         </div>
       </div>
 
       {/* Action Footer */}
-      <div className="mt-8 pt-6 border-t border-charcoal-900/5 flex items-center justify-between">
+      <div className="mt-8 pt-6 border-t border-cream-border flex items-center justify-between">
         <Link
           href={href}
-          className="inline-flex items-center gap-2 text-sm font-bold text-brand-dark hover:text-gold-deep transition-colors"
+          className="inline-flex items-center gap-2 text-sm font-bold text-brand-primary hover:text-gold-deep transition-colors"
         >
           <span>{t("ctaDetail")}</span>
           <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />

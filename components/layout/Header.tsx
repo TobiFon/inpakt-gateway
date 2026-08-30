@@ -1,4 +1,3 @@
-// components/layout/Header.tsx
 "use client";
 
 import React, { useState, useCallback } from "react";
@@ -22,10 +21,10 @@ export const Header: React.FC = () => {
   const handleCloseNav = useCallback(() => setMobileNavOpen(false), []);
 
   return (
-    <header className="sticky top-0 z-40 bg-[#051811]/95 backdrop-blur-md border-b border-white/10 transition-colors duration-200">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-cream-border shadow-xs transition-colors duration-200">
       <Container>
         <div className="flex items-center justify-between h-16 sm:h-20 gap-4">
-          {/* Logo (Clicks to Home) */}
+          {/* Logo */}
           <Link href="/" className="flex items-center shrink-0 group py-1">
             <Image
               src="/logo.png"
@@ -37,7 +36,7 @@ export const Header: React.FC = () => {
             />
           </Link>
 
-          {/* Desktop Navigation (Sleek 6 items) */}
+          {/* Desktop Navigation */}
           <nav className="hidden xl:flex items-center gap-2">
             {headerNavItems.map((item) => {
               const isActive = pathname.startsWith(item.href);
@@ -47,13 +46,16 @@ export const Header: React.FC = () => {
                   key={item.key}
                   href={item.href}
                   className={cn(
-                    "px-4 py-2 rounded-full text-sm font-medium transition-all duration-150 whitespace-nowrap",
+                    "px-4 py-2 rounded-full text-sm font-semibold transition-all duration-150 whitespace-nowrap relative",
                     isActive
-                      ? "text-white bg-white/15 font-semibold shadow-sm"
-                      : "text-white/75 hover:text-white hover:bg-white/5"
+                      ? "text-brand-darkest bg-brand-subtle border border-brand-border shadow-xs font-bold"
+                      : "text-charcoal-700 hover:text-brand-primary hover:bg-cream-100"
                   )}
                 >
                   {t(item.key)}
+                  {isActive && (
+                    <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-gold-primary" />
+                  )}
                 </Link>
               );
             })}
@@ -62,16 +64,16 @@ export const Header: React.FC = () => {
           {/* Right Header Actions */}
           <div className="flex items-center gap-3 sm:gap-4 shrink-0">
             <div className="hidden sm:block">
-              <LanguageSwitcher variant="light" />
+              <LanguageSwitcher variant="dark" />
             </div>
 
             <Button
               href="/support"
               variant="gold"
               size="sm"
-              className="hidden lg:inline-flex"
+              className="hidden lg:inline-flex shadow-sm hover:shadow-md"
               icon={
-                <Heart className="w-3.5 h-3.5 fill-current text-brand-darkest shrink-0" />
+                <Heart className="w-3.5 h-3.5 fill-current text-white shrink-0" />
               }
             >
               {t("supportButton")}
@@ -81,7 +83,7 @@ export const Header: React.FC = () => {
             <button
               type="button"
               onClick={handleOpenNav}
-              className="xl:hidden p-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 active:bg-white/20 transition-colors cursor-pointer"
+              className="xl:hidden p-2 rounded-xl text-charcoal-700 hover:text-brand-primary hover:bg-cream-100 active:bg-cream-200 transition-colors cursor-pointer border border-cream-border"
               aria-label={t("openMenu")}
             >
               <Menu className="w-6 h-6" />
@@ -90,7 +92,7 @@ export const Header: React.FC = () => {
         </div>
       </Container>
 
-      {/* Slide-out Portal Drawer */}
+      {/* Slide-out Mobile Portal Drawer */}
       <MobileNav isOpen={mobileNavOpen} onClose={handleCloseNav} />
     </header>
   );

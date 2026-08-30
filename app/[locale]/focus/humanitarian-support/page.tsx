@@ -3,17 +3,21 @@ import { useTranslations } from "next-intl";
 import { FocusDetailLayout } from "@/components/focus/FocusDetailLayout";
 import { createSiteMetadata } from "@/lib/seo";
 import { HandHeart } from "lucide-react";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
+  const t = await getTranslations({
+    locale,
+    namespace: "metadata.humanitarian",
+  });
+
   return createSiteMetadata({
-    title: "Humanitarian Support Focus Area",
-    description:
-      "Transparent emergency assistance and community resilience for vulnerable populations.",
+    title: t("title"),
+    description: t("description"),
     locale,
     pathname: "/focus/humanitarian-support",
   });

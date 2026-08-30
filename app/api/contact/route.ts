@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { validateContactPayload } from "@/lib/validation";
+import { sendContactEmail } from "@/lib/email";
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,16 +19,22 @@ export async function POST(request: NextRequest) {
 
     const { sanitizedData } = validation;
 
-    // Log clean contact inquiry in server logs
-    console.info("[Impakt Gateway API] New Contact Inquiry Received:", {
+    // Dispatch notification email via Resend to fclerencef@gmail.com
+    await sendContactEmail({
+      name: sanitizedData.name,
+      email: sanitizedData.email,
+      category: sanitizedData.category,
+      subject: sanitizedData.subject,
+      message: sanitizedData.message,
+    });
+
+    console.info("[Impakt Gateway API] Contact Inquiry successfully sent to recipient:", {
       name: sanitizedData.name,
       email: sanitizedData.email,
       category: sanitizedData.category,
       subject: sanitizedData.subject,
       timestamp: new Date().toISOString(),
     });
-
-    // Ready for webhook or email transport integration (e.g. Resend / SendGrid / Nodemailer)
 
     return NextResponse.json(
       {

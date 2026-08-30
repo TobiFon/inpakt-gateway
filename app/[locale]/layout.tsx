@@ -1,14 +1,19 @@
-// app/[locale]/layout.tsx
 import React from "react";
 import { Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
 import { locales, type Locale } from "@/i18n/routing";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageContainer } from "@/components/layout/PageContainer";
-import { Analytics } from "@vercel/analytics/next";
+import { BackToTop } from "@/components/ui/BackToTop";
+import { CookieConsent } from "@/components/shared/CookieConsent";
+import { Analytics } from "@/components/analytics/Analytics";
 import { createSiteMetadata, getOrganizationSchema } from "@/lib/seo";
 import "@/styles/globals.css";
 
@@ -36,10 +41,11 @@ export async function generateMetadata({
 }: {
   params: { locale: string };
 }) {
+  const t = await getTranslations({ locale, namespace: "metadata.home" });
+
   return createSiteMetadata({
-    title: "Impakt Gateway e.V.",
-    description:
-      "Connecting people, institutions, resources and opportunities across Cameroon and Germany to create sustainable impact.",
+    title: t("title"),
+    description: t("description"),
     locale,
   });
 }
@@ -77,6 +83,8 @@ export default async function LocaleLayout({
           <Header />
           <PageContainer>{children}</PageContainer>
           <Footer />
+          <BackToTop />
+          <CookieConsent />
           <Analytics />
         </NextIntlClientProvider>
       </body>

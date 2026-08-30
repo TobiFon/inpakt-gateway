@@ -1,12 +1,8 @@
 import { DonationConfig } from "@/types/donation";
 
-/**
- * Central Donation Configuration
- * Edit bank details, PayPal endpoints, and legal donation attributes here in a single place.
- */
 export const donationConfig: DonationConfig = {
   organizationName: "Impakt Gateway e.V.",
-  registrationStatus: "Eingetragener Verein (e.V.) – Germany",
+  registrationStatus: "Eingetragener Verein (e.V.) – Germany & Africa",
   bank: {
     accountHolder: "Impakt Gateway e.V.",
     bankName: "GLS Bank / EthikBank (In Setup)",

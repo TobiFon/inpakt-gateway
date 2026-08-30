@@ -9,7 +9,7 @@ export const DonationMethods: React.FC = () => {
   const t = useTranslations("supportPage");
 
   return (
-    <section className="py-16 sm:py-20 bg-cream-100 border-y border-cream-border">
+    <section className="py-16 sm:py-24 bg-white border-y border-cream-border">
       <Container>
         <SectionHeading
           eyebrow={t("methodsEyebrow")}

@@ -7,10 +7,10 @@ export interface PartnershipFormData {
   email: string;
   organizationType:
     | "institution"
-    | "university"
     | "ngo"
     | "business"
     | "donor"
+    | "individual"
     | "other";
   focusArea: FocusAreaId | "multi-sector";
   message: string;

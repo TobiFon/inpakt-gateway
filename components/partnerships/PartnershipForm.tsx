@@ -47,7 +47,7 @@ export const PartnershipForm: React.FC = () => {
           organizationType: formData.organizationType,
           focusArea: formData.focusArea,
           message: formData.message,
-          website: formData.honeypot, // Honeypot field
+          website: formData.honeypot,
         }),
       });
 
@@ -61,7 +61,7 @@ export const PartnershipForm: React.FC = () => {
             "Unable to process your partnership inquiry at this time. Please check your fields and try again."
         );
       }
-    } catch (err) {
+    } catch {
       setErrorMessage(
         "Network connection error. Please try again or email us directly."
       );
@@ -71,47 +71,48 @@ export const PartnershipForm: React.FC = () => {
   };
 
   return (
-    <section className="py-16 sm:py-20 bg-cream-50" id="proposal-form">
+    <section className="py-16 sm:py-24 bg-white" id="proposal-form">
       <Container size="content">
         <Card
-          variant="white"
-          className="p-8 sm:p-12 border border-charcoal-900/5 shadow-card"
+          variant="gold-accent"
+          className="p-8 sm:p-12 border border-cream-border shadow-card"
         >
           {isSubmitted ? (
             <div className="text-center py-10 space-y-4">
-              <div className="w-16 h-16 rounded-full bg-brand-subtle text-brand-dark flex items-center justify-center mx-auto shadow-sm">
+              <div className="w-16 h-16 rounded-full bg-brand-subtle text-brand-primary border border-brand-border flex items-center justify-center mx-auto shadow-sm">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <h3 className="text-2xl font-bold text-charcoal-900">
+              <h3 className="text-2xl font-bold text-charcoal-900 font-serif">
                 {t("successTitle")}
               </h3>
-              <p className="text-sm sm:text-base text-charcoal-600 max-w-md mx-auto leading-relaxed">
+              <p className="text-sm sm:text-base text-charcoal-600 max-w-md mx-auto leading-relaxed font-medium">
                 {t("successMessage")}
               </p>
             </div>
           ) : (
             <div>
               <div className="mb-8">
-                <p className="text-xs uppercase font-bold tracking-widest text-gold-deep mb-2">
+                <p className="text-xs uppercase font-extrabold tracking-widest text-gold-deep mb-2 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-gold-primary" />
                   {t("formEyebrow")}
                 </p>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-charcoal-900">
+                <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-charcoal-900">
                   {t("formTitle")}
                 </h2>
-                <p className="mt-2 text-sm sm:text-base text-charcoal-600 leading-relaxed">
+                <p className="mt-2 text-sm sm:text-base text-charcoal-600 leading-relaxed font-medium">
                   {t("formSubtitle")}
                 </p>
               </div>
 
               {errorMessage && (
-                <div className="mb-6 p-4 rounded-xl bg-red-50 text-red-700 border border-red-200 text-sm flex items-start gap-3">
+                <div className="mb-6 p-4 rounded-2xl bg-red-50 text-red-700 border border-red-200 text-sm flex items-start gap-3">
                   <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
                   <span>{errorMessage}</span>
                 </div>
               )}
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Honeypot field for spam prevention */}
+                {/* Honeypot */}
                 <input
                   type="text"
                   name="website"
@@ -138,7 +139,7 @@ export const PartnershipForm: React.FC = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, fullName: e.target.value })
                       }
-                      className="w-full px-4 py-3 rounded-xl border border-charcoal-900/10 bg-cream-50 text-sm text-charcoal-900 focus:bg-white focus:border-brand-primary focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors"
                     />
                   </div>
 
@@ -157,7 +158,7 @@ export const PartnershipForm: React.FC = () => {
                           organization: e.target.value,
                         })
                       }
-                      className="w-full px-4 py-3 rounded-xl border border-charcoal-900/10 bg-cream-50 text-sm text-charcoal-900 focus:bg-white focus:border-brand-primary focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors"
                     />
                   </div>
                 </div>
@@ -175,7 +176,7 @@ export const PartnershipForm: React.FC = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
                       }
-                      className="w-full px-4 py-3 rounded-xl border border-charcoal-900/10 bg-cream-50 text-sm text-charcoal-900 focus:bg-white focus:border-brand-primary focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors"
                     />
                   </div>
 
@@ -187,12 +188,12 @@ export const PartnershipForm: React.FC = () => {
                     <input
                       type="text"
                       required
-                      placeholder="e.g. Germany, Cameroon, France..."
+                      placeholder="e.g., Germany, Kenya, Ghana, Nigeria..."
                       value={formData.country}
                       onChange={(e) =>
                         setFormData({ ...formData, country: e.target.value })
                       }
-                      className="w-full px-4 py-3 rounded-xl border border-charcoal-900/10 bg-cream-50 text-sm text-charcoal-900 focus:bg-white focus:border-brand-primary focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors"
                     />
                   </div>
                 </div>
@@ -212,7 +213,7 @@ export const PartnershipForm: React.FC = () => {
                             .value as PartnershipFormData["organizationType"],
                         })
                       }
-                      className="w-full px-4 py-3 rounded-xl border border-charcoal-900/10 bg-cream-50 text-sm text-charcoal-900 focus:bg-white focus:border-brand-primary focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors"
                     >
                       <option value="institution">{t("optInstitution")}</option>
                       <option value="ngo">{t("optNgo")}</option>
@@ -223,7 +224,7 @@ export const PartnershipForm: React.FC = () => {
                     </select>
                   </div>
 
-                  {/* Area of Shared Interest */}
+                  {/* Area of Interest */}
                   <div>
                     <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider mb-2">
                       {t("fieldFocus")} *
@@ -237,7 +238,7 @@ export const PartnershipForm: React.FC = () => {
                             .value as PartnershipFormData["focusArea"],
                         })
                       }
-                      className="w-full px-4 py-3 rounded-xl border border-charcoal-900/10 bg-cream-50 text-sm text-charcoal-900 focus:bg-white focus:border-brand-primary focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors"
                     >
                       <option value="multi-sector">{t("optAllFocus")}</option>
                       <option value="education">Education</option>
@@ -249,7 +250,7 @@ export const PartnershipForm: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Proposal Message */}
+                {/* Message */}
                 <div>
                   <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider mb-2">
                     {t("fieldMessage")} *
@@ -261,16 +262,15 @@ export const PartnershipForm: React.FC = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-xl border border-charcoal-900/10 bg-cream-50 text-sm text-charcoal-900 focus:bg-white focus:border-brand-primary focus:outline-none transition-colors leading-relaxed"
+                    className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors leading-relaxed"
                   />
                 </div>
 
-                {/* Submit Trigger */}
                 <div className="pt-2">
                   <Button
                     variant="gold"
                     size="lg"
-                    className="w-full sm:w-auto"
+                    className="w-full sm:w-auto shadow-md"
                     disabled={isSubmitting}
                     icon={<Send className="w-4 h-4" />}
                   >

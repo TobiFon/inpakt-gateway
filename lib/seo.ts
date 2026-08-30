@@ -1,4 +1,3 @@
-// lib/seo.ts
 import { Metadata } from "next";
 import { SITE_NAME, CONTACT_INFO, SOCIAL_LINKS } from "./constants";
 
@@ -97,11 +96,11 @@ export function getOrganizationSchema() {
     logo: `${baseUrl}/logo.png`,
     email: CONTACT_INFO.email,
     description:
-      "Germany-registered non-profit organization connecting Cameroon and Germany through partnerships, opportunities, resources, and sustainable development initiatives.",
+      "Germany-registered non-profit organization connecting Africa and Germany through partnerships, opportunities, resources, and sustainable development initiatives.",
     areaServed: [
       {
-        "@type": "Country",
-        name: "Cameroon",
+        "@type": "Place",
+        name: "Africa",
       },
       {
         "@type": "Country",

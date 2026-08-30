@@ -1,30 +1,42 @@
 :root {
-  --color-brand-darkest: #061610;
-  --color-brand-darker: #09261c;
-  --color-brand-dark: #0e382a;
-  --color-brand-primary: #144d3a;
-  --color-brand-medium: #1d6b52;
-  --color-brand-light: #288768;
+  /* Brand Green Palette (Primary Authority & Hero Color) */
+  --color-brand-darkest: #0c3323;
+  --color-brand-darker: #124630;
+  --color-brand-dark: #15633e;
+  --color-brand-primary: #15803d;
+  --color-brand-medium: #16a34a;
+  --color-brand-light: #22c55e;
+  --color-brand-subtle: #f0fdf4;
+  --color-brand-border: #bbf7d0;
 
+  /* Brand Warm Gold / Orange Palette (Catalyst & Accent Color from Logo) */
   --color-gold-deep: #9a6310;
   --color-gold-rich: #ba7a18;
   --color-gold-primary: #d99227;
   --color-gold-light: #e5a338;
   --color-gold-bright: #f3b84a;
-  --color-gold-warm: #fbf2df;
+  --color-gold-warm: #fdf6ea;
+  --color-gold-border: #f5d8a0;
 
-  --color-cream-bg: #faf7f2;
-  --color-cream-card: #ffffff;
-  --color-cream-muted: #f4efe6;
-  --color-cream-border: #e8e2d5;
+  /* Clean Light-Mode Surfaces */
+  --color-surface-bg: #faf9f6;
+  --color-surface-card: #ffffff;
+  --color-surface-muted: #f4f1ea;
+  --color-surface-border: #e7e2d7;
 
+  /* Typography Charcoal Scale */
+  --color-charcoal-950: #0a0f0d;
   --color-charcoal-900: #101614;
-  --color-charcoal-800: #1a2420;
-  --color-charcoal-600: #43514a;
-  --color-charcoal-400: #8a9a92;
+  --color-charcoal-800: #1d2723;
+  --color-charcoal-700: #2d3b35;
+  --color-charcoal-600: #46564f;
+  --color-charcoal-500: #667870;
+  --color-charcoal-400: #8e9e97;
+  --color-charcoal-300: #cbd5d0;
 
-  --max-w-site: 1280px;
-  --max-w-content: 1040px;
+  --max-w-site: 1320px;
+  --max-w-content: 1080px;
+  --max-w-narrow: 840px;
   --radius-button: 9999px;
-  --radius-card: 1.25rem;
+  --radius-card: 1.5rem;
 }

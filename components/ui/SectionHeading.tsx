@@ -25,23 +25,31 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
 
   return (
     <div
-      className={cn("max-w-2xl", isCenter && "mx-auto text-center", className)}
+      className={cn("max-w-3xl", isCenter && "mx-auto text-center", className)}
     >
       {eyebrow && (
-        <p
+        <div
           className={cn(
-            "text-xs uppercase font-extrabold tracking-widest mb-3",
-            isDark ? "text-gold-light" : "text-gold-deep"
+            "flex items-center gap-2 mb-3.5",
+            isCenter && "justify-center"
           )}
         >
-          {eyebrow}
-        </p>
+          <span className="w-2 h-2 rounded-full bg-gold-primary shrink-0 shadow-xs" />
+          <p
+            className={cn(
+              "text-xs uppercase font-extrabold tracking-widest",
+              isDark ? "text-gold-bright" : "text-brand-primary"
+            )}
+          >
+            {eyebrow}
+          </p>
+        </div>
       )}
 
-      {/* Editorial Serif Section Title */}
+      {/* Editorial Playfair Display Headline */}
       <h2
         className={cn(
-          "font-serif text-2xl sm:text-4xl lg:text-[2.6rem] font-bold tracking-tight leading-[1.18]",
+          "font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight leading-[1.14]",
           isDark ? "text-white" : "text-charcoal-900"
         )}
       >
@@ -50,8 +58,8 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
           <span
             className={cn(
               isDark
-                ? "text-gold-primary italic font-normal"
-                : "text-brand-primary italic font-normal"
+                ? "text-gold-bright italic font-extrabold"
+                : "text-brand-primary italic font-extrabold"
             )}
           >
             {highlightedWord}
@@ -62,8 +70,9 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       {description && (
         <p
           className={cn(
-            "mt-3.5 text-base sm:text-lg leading-relaxed font-sans",
-            isDark ? "text-white/70" : "text-charcoal-600"
+            "mt-4 text-base sm:text-lg leading-relaxed font-sans max-w-2xl",
+            isCenter && "mx-auto",
+            isDark ? "text-white/80" : "text-charcoal-600"
           )}
         >
           {description}

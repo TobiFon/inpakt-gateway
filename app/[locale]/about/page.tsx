@@ -1,10 +1,10 @@
 import React from "react";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { AboutHero } from "@/components/about/AboutHero";
 import { AboutMissionVision } from "@/components/about/AboutMissionVision";
 import { AboutPrinciples } from "@/components/about/AboutPrinciples";
 import { AboutConnection } from "@/components/about/AboutConnection";
-import { AboutTeamReserved } from "@/components/about/AboutTeamReserved";
+import { AboutDocuments } from "@/components/about/AboutDocuments";
 import { CTASection } from "@/components/shared/CTASection";
 import { createSiteMetadata } from "@/lib/seo";
 
@@ -13,10 +13,11 @@ export async function generateMetadata({
 }: {
   params: { locale: string };
 }) {
+  const t = await getTranslations({ locale, namespace: "metadata.about" });
+
   return createSiteMetadata({
-    title: "About Us",
-    description:
-      "Impakt Gateway e.V. is a Germany-registered non-profit connecting institutions, resources and people between Cameroon and Germany.",
+    title: t("title"),
+    description: t("description"),
     locale,
     pathname: "/about",
   });
@@ -35,7 +36,7 @@ export default function AboutPage({
       <AboutMissionVision />
       <AboutPrinciples />
       <AboutConnection />
-      <AboutTeamReserved />
+      <AboutDocuments />
       <CTASection />
     </div>
   );

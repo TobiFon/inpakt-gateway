@@ -32,27 +32,35 @@ export const PartnershipValueProp: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-20 bg-cream-100 border-y border-cream-border">
+    <section className="py-16 sm:py-24 bg-cream-50/50 border-y border-cream-border">
       <Container>
         <SectionHeading eyebrow={t("valueEyebrow")} title={t("valueTitle")} />
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {values.map((item, idx) => {
             const Icon = item.icon;
+            const isGold = idx % 2 === 1;
+
             return (
               <Card
                 key={idx}
                 variant="white"
-                className="p-7 sm:p-8 border border-charcoal-900/5 shadow-card flex items-start gap-5"
+                className="p-7 sm:p-8 border border-cream-border shadow-card flex items-start gap-5 hover:border-brand-primary/40 transition-all"
               >
-                <div className="w-12 h-12 rounded-2xl bg-gold-warm text-gold-deep flex items-center justify-center shrink-0">
+                <div
+                  className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-xs ${
+                    isGold
+                      ? "bg-gold-warm text-gold-deep border border-gold-border"
+                      : "bg-brand-subtle text-brand-primary border border-brand-border"
+                  }`}
+                >
                   <Icon className="w-6 h-6" />
                 </div>
                 <div>
                   <h3 className="font-bold text-lg text-charcoal-900 mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-charcoal-600 leading-relaxed">
+                  <p className="text-sm text-charcoal-600 leading-relaxed font-normal">
                     {item.desc}
                   </p>
                 </div>

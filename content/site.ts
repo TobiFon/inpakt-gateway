@@ -1,5 +1,5 @@
-import { CONTACT_INFO, SOCIAL_LINKS } from "../lib/constants";
-import { SiteMeta } from "../types/site";
+import { CONTACT_INFO, SOCIAL_LINKS } from "@/lib/constants";
+import { SiteMeta } from "@/types/site";
 
 export const siteMeta: SiteMeta = {
   name: "Impakt Gateway e.V.",

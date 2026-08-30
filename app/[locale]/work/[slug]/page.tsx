@@ -1,7 +1,7 @@
 import React from "react";
 import { notFound } from "next/navigation";
-import { locales } from "@/i18n/routing";
-import { projects } from "@/content/project";
+import { locales, type Locale } from "@/i18n/routing";
+import { projects, getLocalizedProject } from "@/content/project";
 import { Container } from "@/components/ui/Container";
 import { ProjectDetailHero } from "@/components/work/ProjectDetailHero";
 import { ProjectDetailContent } from "@/components/work/ProjectDetailContent";
@@ -27,7 +27,7 @@ export async function generateMetadata({
 }: {
   params: { locale: string; slug: string };
 }) {
-  const project = projects.find((p) => p.slug === slug && p.verified);
+  const project = getLocalizedProject(slug, locale as Locale);
 
   if (!project) {
     return {
@@ -44,11 +44,11 @@ export async function generateMetadata({
 }
 
 export default function ProjectDetailPage({
-  params: { slug },
+  params: { locale, slug },
 }: {
-  params: { slug: string };
+  params: { locale: string; slug: string };
 }) {
-  const project = projects.find((p) => p.slug === slug && p.verified);
+  const project = getLocalizedProject(slug, locale as Locale);
 
   if (!project) {
     notFound();
@@ -56,19 +56,15 @@ export default function ProjectDetailPage({
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* 1. Detail Hero Banner */}
       <ProjectDetailHero project={project} />
 
-      {/* 2. Main Content & Sidebar Grid */}
-      <section className="py-12 sm:py-16 bg-cream-50">
+      <section className="py-12 sm:py-16 bg-cream-50/50">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Left Content Column */}
             <div className="lg:col-span-8">
               <ProjectDetailContent project={project} />
             </div>
 
-            {/* Right Sticky Sidebar */}
             <div className="lg:col-span-4 lg:sticky lg:top-28">
               <ProjectDetailSidebar project={project} />
             </div>
@@ -76,7 +72,6 @@ export default function ProjectDetailPage({
         </Container>
       </section>
 
-      {/* 3. Global Conversion Banner */}
       <CTASection />
     </div>
   );

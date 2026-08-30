@@ -19,11 +19,11 @@ export const BankTransferCard: React.FC = () => {
   return (
     <Card
       variant="white"
-      className="p-8 sm:p-10 border border-charcoal-900/5 shadow-card h-full flex flex-col justify-between"
+      className="p-8 sm:p-10 border border-cream-border shadow-card h-full flex flex-col justify-between"
     >
       <div>
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-12 h-12 rounded-2xl bg-brand-subtle text-brand-dark flex items-center justify-center">
+          <div className="w-12 h-12 rounded-2xl bg-brand-subtle text-brand-primary border border-brand-border flex items-center justify-center shadow-xs">
             <Landmark className="w-6 h-6" />
           </div>
           <h3 className="text-xl font-bold text-charcoal-900">
@@ -31,14 +31,14 @@ export const BankTransferCard: React.FC = () => {
           </h3>
         </div>
 
-        <p className="text-xs sm:text-sm text-charcoal-600 leading-relaxed mb-6">
+        <p className="text-xs sm:text-sm text-charcoal-600 leading-relaxed mb-6 font-normal">
           {t("bankDesc")}
         </p>
 
-        {/* Bank Parameters Table */}
+        {/* Bank Details Table */}
         <div className="space-y-3.5 text-xs sm:text-sm bg-cream-50 p-5 rounded-2xl border border-cream-border">
           <div>
-            <span className="text-xs text-charcoal-500 block font-medium">
+            <span className="text-xs text-charcoal-500 block font-semibold">
               {t("fieldAccountHolder")}
             </span>
             <span className="font-bold text-charcoal-900">
@@ -47,16 +47,16 @@ export const BankTransferCard: React.FC = () => {
           </div>
 
           <div>
-            <span className="text-xs text-charcoal-500 block font-medium">
+            <span className="text-xs text-charcoal-500 block font-semibold">
               {t("fieldBank")}
             </span>
-            <span className="font-semibold text-charcoal-900">
+            <span className="font-bold text-charcoal-900">
               {donationConfig.bank.bankName}
             </span>
           </div>
 
           <div>
-            <span className="text-xs text-charcoal-500 block font-medium">
+            <span className="text-xs text-charcoal-500 block font-semibold">
               {t("fieldIban")}
             </span>
             <span className="font-mono font-bold text-charcoal-900 tracking-wider">
@@ -65,16 +65,16 @@ export const BankTransferCard: React.FC = () => {
           </div>
 
           <div>
-            <span className="text-xs text-charcoal-500 block font-medium">
+            <span className="text-xs text-charcoal-500 block font-semibold">
               {t("fieldBic")}
             </span>
-            <span className="font-mono font-semibold text-charcoal-900">
+            <span className="font-mono font-bold text-charcoal-900">
               {donationConfig.bank.bic}
             </span>
           </div>
 
           <div>
-            <span className="text-xs text-charcoal-500 block font-medium">
+            <span className="text-xs text-charcoal-500 block font-semibold">
               {t("fieldReference")}
             </span>
             <span className="font-medium text-charcoal-800">
@@ -84,15 +84,15 @@ export const BankTransferCard: React.FC = () => {
         </div>
       </div>
 
-      {/* Copy Trigger */}
-      <div className="mt-6 pt-4 border-t border-charcoal-900/5">
+      <div className="mt-6 pt-4 border-t border-cream-border">
         <button
+          type="button"
           onClick={handleCopyIban}
-          className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-brand-primary text-white text-xs sm:text-sm font-semibold hover:bg-brand-dark transition-colors cursor-pointer"
+          className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-brand-primary text-white text-xs sm:text-sm font-bold hover:bg-brand-dark transition-colors cursor-pointer shadow-xs"
         >
           {copied ? (
             <>
-              <Check className="w-4 h-4 text-gold-light" />
+              <Check className="w-4 h-4 text-gold-bright" />
               <span>{t("copied")}</span>
             </>
           ) : (

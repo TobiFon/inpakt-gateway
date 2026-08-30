@@ -42,13 +42,13 @@ export const FocusDetailLayout: React.FC<FocusDetailLayoutProps> = ({
         approachText={approachText}
       />
 
-      {/* 3. Cameroon ↔ Germany Bilateral Dimension & Action Vectors */}
+      {/* 3. Africa ↔ Germany Bilateral Dimension & Actions */}
       <FocusBilateralDimension
         bilateralDesc={bilateralDesc}
         actions={actions}
       />
 
-      {/* 4. Global Support & Partnership CTA */}
+      {/* 4. Support & Partnership CTA */}
       <CTASection />
     </div>
   );

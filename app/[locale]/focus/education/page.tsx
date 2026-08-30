@@ -13,7 +13,7 @@ export async function generateMetadata({
   return createSiteMetadata({
     title: "Education Focus Area",
     description:
-      "Connecting educational institutions and digital learning pathways between Cameroon and Germany.",
+      "Connecting educational institutions, vocational systems and digital learning pathways between Africa and Germany.",
     locale,
     pathname: "/focus/education",
   });

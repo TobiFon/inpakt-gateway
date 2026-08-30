@@ -7,22 +7,23 @@ export const AboutHero: React.FC = () => {
   const t = useTranslations("aboutPage");
 
   return (
-    <section className="relative bg-brand-darkest text-white pt-14 sm:pt-20 pb-16 sm:pb-24 overflow-hidden border-b border-white/10">
-      {/* Ambient background glow */}
-      <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-brand-primary/25 rounded-full blur-[100px] pointer-events-none" />
+    <section className="relative bg-gradient-to-b from-brand-subtle/60 via-white to-cream-50 text-charcoal-900 pt-14 sm:pt-20 pb-16 sm:pb-20 overflow-hidden border-b border-cream-border">
+      {/* Ambient Lighting */}
+      <div className="absolute -top-24 left-[20%] w-[550px] h-[380px] bg-brand-primary/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute -top-20 right-[20%] w-[480px] h-[380px] bg-gold-primary/15 rounded-full blur-[120px] pointer-events-none" />
 
       <Container size="content">
-        <div className="text-center space-y-5">
+        <div className="text-center space-y-4 max-w-3xl mx-auto">
           <Badge variant="gold" dot>
             {t("badge")}
           </Badge>
 
-          <h1 className="font-serif text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-[1.15]">
+          <h1 className="font-serif text-3xl sm:text-5xl font-extrabold text-charcoal-900 tracking-tight leading-[1.15]">
             {t("heroTitle")}{" "}
-            <span className="text-gold-primary">{t("heroHighlight")}</span>
+            <span className="text-brand-primary">{t("heroHighlight")}</span>
           </h1>
 
-          <p className="mt-4 text-base sm:text-lg text-white/80 leading-relaxed max-w-2xl mx-auto">
+          <p className="mt-4 text-base sm:text-lg text-charcoal-600 leading-relaxed max-w-2xl mx-auto font-medium">
             {t("heroSubtitle")}
           </p>
         </div>

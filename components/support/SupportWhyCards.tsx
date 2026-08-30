@@ -32,27 +32,39 @@ export const SupportWhyCards: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-20 bg-cream-50">
+    <section className="py-16 sm:py-24 bg-cream-50/50">
       <Container>
         <SectionHeading eyebrow={t("whyEyebrow")} title={t("whyTitle")} />
 
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {pillars.map((item, idx) => {
             const Icon = item.icon;
+            const isGold = idx % 2 === 1;
+
             return (
               <Card
                 key={idx}
                 variant="white"
-                className="p-6 sm:p-8 border border-charcoal-900/5 shadow-card hover:border-brand-primary/30 flex flex-col justify-between"
+                className={`p-6 sm:p-8 border border-cream-border shadow-card flex flex-col justify-between transition-all duration-300 ${
+                  isGold
+                    ? "hover:border-gold-primary/60"
+                    : "hover:border-brand-primary/60"
+                }`}
               >
                 <div>
-                  <div className="w-12 h-12 rounded-2xl bg-brand-subtle text-brand-dark flex items-center justify-center mb-5">
+                  <div
+                    className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-5 shadow-xs ${
+                      isGold
+                        ? "bg-gold-warm text-gold-deep border border-gold-border"
+                        : "bg-brand-subtle text-brand-primary border border-brand-border"
+                    }`}
+                  >
                     <Icon className="w-6 h-6" />
                   </div>
-                  <h3 className="font-bold text-base sm:text-lg text-charcoal-900 mb-2">
+                  <h3 className="font-bold text-base sm:text-lg text-charcoal-900 mb-2.5">
                     {item.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-charcoal-600 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-charcoal-600 leading-relaxed font-normal">
                     {item.desc}
                   </p>
                 </div>

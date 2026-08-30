@@ -1,7 +1,7 @@
 import React from "react";
 import { Linkedin, Facebook, Instagram } from "lucide-react";
-import { SOCIAL_LINKS } from "../../lib/constants";
-import { cn } from "../../lib/utils";
+import { SOCIAL_LINKS } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 interface SocialLinksProps {
   className?: string;
@@ -11,7 +11,7 @@ interface SocialLinksProps {
 
 export const SocialLinks: React.FC<SocialLinksProps> = ({
   className,
-  variant = "dark",
+  variant = "brand",
   size = "md",
 }) => {
   const linkItems = [
@@ -25,10 +25,10 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
 
   const variantClasses = {
     light:
-      "bg-white/10 text-white hover:bg-gold-primary hover:text-brand-darkest",
-    dark: "bg-charcoal-800 text-white hover:bg-brand-primary",
+      "bg-white/10 text-white hover:bg-gold-primary hover:text-white border border-white/20",
+    dark: "bg-brand-darkest text-white hover:bg-gold-primary",
     brand:
-      "bg-brand-subtle text-brand-dark hover:bg-brand-primary hover:text-white",
+      "bg-cream-100 text-charcoal-700 hover:bg-brand-primary hover:text-white border border-cream-border",
   };
 
   return (
@@ -43,7 +43,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
             rel="noopener noreferrer"
             aria-label={item.name}
             className={cn(
-              "rounded-full flex items-center justify-center transition-all duration-200 shadow-sm",
+              "rounded-full flex items-center justify-center transition-all duration-200 shadow-xs hover:-translate-y-0.5",
               sizeClasses,
               variantClasses[variant]
             )}

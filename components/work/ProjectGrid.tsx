@@ -23,7 +23,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
   });
 
   return (
-    <section className="py-12 sm:py-16 bg-cream-50">
+    <section className="py-12 sm:py-16 bg-cream-50/50">
       <Container>
         {/* Interactive Filters Bar */}
         <ProjectFilters
@@ -31,7 +31,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
           onSelectCategory={setActiveCategory}
         />
 
-        {/* Dynamic Project List or Transparent Empty State */}
+        {/* Dynamic Project List */}
         <div className="mt-8">
           {filteredProjects.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
