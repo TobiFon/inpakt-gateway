@@ -9,8 +9,8 @@ export function sanitizeString(input: unknown): string {
   if (typeof input !== "string") return "";
   return input
     .trim()
-    .replace(/<[^>]*>?/gm, "") // Strip HTML tags
-    .slice(0, 5000); // Enforce reasonable length boundary
+    .replace(/<[^>]*>?/gm, "")
+    .slice(0, 5000);
 }
 
 export interface ValidationResult<T> {
@@ -30,7 +30,7 @@ export function validateContactPayload(
 
   const data = body as Record<string, unknown>;
 
-  // Honeypot check for bots
+  // Anti-Spam Honeypot
   if (
     data.website &&
     typeof data.website === "string" &&
@@ -100,7 +100,7 @@ export function validatePartnershipPayload(
 
   const data = body as Record<string, unknown>;
 
-  // Honeypot check for bots
+  // Anti-Spam Honeypot
   if (
     data.website &&
     typeof data.website === "string" &&

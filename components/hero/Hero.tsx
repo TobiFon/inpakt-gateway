@@ -2,7 +2,13 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
-import { Heart, Users2, Globe2, ArrowRight, Sparkles } from "lucide-react";
+import {
+  Heart,
+  Users2,
+  Globe2,
+  ArrowRight,
+  Sparkles,
+} from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { HeroSlideshow } from "./HeroSlideshow";
@@ -21,7 +27,7 @@ export const Hero: React.FC = () => {
 
       <Container>
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center py-14 sm:py-20 lg:py-24">
-          {/* Left Column: Headlines & CTAs */}
+          {/* Left Column */}
           <div className="lg:col-span-7 max-w-2xl">
             {/* Eyebrow */}
             <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-gold-border/90 bg-gold-warm px-4 py-2 shadow-xs">
@@ -47,7 +53,7 @@ export const Hero: React.FC = () => {
               </span>
             </h1>
 
-            {/* Decorative Brand Divider */}
+            {/* Decorative Divider */}
             <div className="mt-6 flex items-center gap-3">
               <span className="h-1.5 w-12 rounded-full bg-brand-primary" />
               <span className="h-2.5 w-2.5 rounded-full bg-gold-primary" />
@@ -59,11 +65,11 @@ export const Hero: React.FC = () => {
               {t("description")}
             </p>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons: Primary is Green */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Button
                 href="/support"
-                variant="gold"
+                variant="primary"
                 size="lg"
                 className="shadow-md hover:shadow-lg"
                 icon={
@@ -78,9 +84,7 @@ export const Hero: React.FC = () => {
                 variant="outline-dark"
                 size="lg"
                 className="border-cream-border text-charcoal-900 hover:border-brand-primary hover:text-brand-primary"
-                icon={
-                  <Users2 className="h-[18px] w-[18px] text-brand-primary" />
-                }
+                icon={<Users2 className="h-[18px] w-[18px] text-brand-primary" />}
               >
                 {t("secondaryCta")}
               </Button>

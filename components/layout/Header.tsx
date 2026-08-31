@@ -61,7 +61,7 @@ export const Header: React.FC = () => {
             })}
           </nav>
 
-          {/* Right Header Actions */}
+          {/* Right Header Actions: Button is Green */}
           <div className="flex items-center gap-3 sm:gap-4 shrink-0">
             <div className="hidden sm:block">
               <LanguageSwitcher variant="dark" />
@@ -69,7 +69,7 @@ export const Header: React.FC = () => {
 
             <Button
               href="/support"
-              variant="gold"
+              variant="primary"
               size="sm"
               className="hidden lg:inline-flex shadow-sm hover:shadow-md"
               icon={
@@ -79,7 +79,7 @@ export const Header: React.FC = () => {
               {t("supportButton")}
             </Button>
 
-            {/* Mobile / Tablet Menu Trigger */}
+            {/* Mobile Menu Trigger */}
             <button
               type="button"
               onClick={handleOpenNav}
@@ -92,7 +92,6 @@ export const Header: React.FC = () => {
         </div>
       </Container>
 
-      {/* Slide-out Mobile Portal Drawer */}
       <MobileNav isOpen={mobileNavOpen} onClose={handleCloseNav} />
     </header>
   );

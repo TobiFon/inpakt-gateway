@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Mail, CheckCircle2, ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 
 export const NewsletterBox: React.FC = () => {
+  const t = useTranslations("actions");
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
@@ -17,29 +19,30 @@ export const NewsletterBox: React.FC = () => {
 
   return (
     <Card
-      variant="white"
-      className="p-8 sm:p-10 border border-charcoal-900/5 shadow-card max-w-3xl mx-auto my-12"
+      variant="gold-accent"
+      className="p-8 sm:p-10 border border-cream-border shadow-card max-w-3xl mx-auto my-12"
     >
       {submitted ? (
         <div className="text-center py-4 flex items-center justify-center gap-3 text-brand-primary font-bold">
-          <CheckCircle2 className="w-5 h-5 text-gold-deep" />
+          <CheckCircle2 className="w-5 h-5 text-gold-primary" />
           <span>
             Thank you for subscribing! We will keep you updated on bilateral
-            calls and initiatives.
+            initiatives.
           </span>
         </div>
       ) : (
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="space-y-1 text-center sm:text-left">
-            <span className="text-xs uppercase font-bold tracking-widest text-gold-deep">
+            <span className="text-xs uppercase font-extrabold tracking-widest text-gold-deep flex items-center gap-1.5 justify-center sm:justify-start">
+              <Mail className="w-3.5 h-3.5 text-gold-primary" />
               STAY INFORMED
             </span>
-            <h3 className="text-xl font-bold text-charcoal-900">
-              Subscribe to Opportunity Updates
+            <h3 className="font-serif text-xl font-bold text-charcoal-900">
+              Subscribe to Initiative Updates
             </h3>
-            <p className="text-xs text-charcoal-600">
-              Get notified when new scholarships, training programs, and partner
-              calls are published.
+            <p className="text-xs text-charcoal-600 font-medium">
+              Get notified when new bilateral calls, training workshops, and
+              programs are launched.
             </p>
           </div>
 
@@ -53,7 +56,7 @@ export const NewsletterBox: React.FC = () => {
               placeholder="Your email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="px-4 py-2.5 rounded-full border border-charcoal-900/10 bg-cream-50 text-xs sm:text-sm text-charcoal-900 focus:bg-white focus:border-brand-primary focus:outline-none"
+              className="px-4 py-2.5 rounded-full border border-cream-border bg-cream-50 text-xs sm:text-sm text-charcoal-900 focus:bg-white focus:border-gold-primary focus:outline-none transition-colors"
             />
             <Button
               variant="gold"

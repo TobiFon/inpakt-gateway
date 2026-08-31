@@ -112,7 +112,6 @@ export const PartnershipForm: React.FC = () => {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Honeypot */}
                 <input
                   type="text"
                   name="website"
@@ -127,7 +126,6 @@ export const PartnershipForm: React.FC = () => {
                 />
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {/* Contact Person */}
                   <div>
                     <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider mb-2">
                       {t("fieldName")} *
@@ -139,11 +137,10 @@ export const PartnershipForm: React.FC = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, fullName: e.target.value })
                       }
-                      className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/15 focus:outline-none transition-colors"
                     />
                   </div>
 
-                  {/* Organization Name */}
                   <div>
                     <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider mb-2">
                       {t("fieldOrg")} *
@@ -158,13 +155,12 @@ export const PartnershipForm: React.FC = () => {
                           organization: e.target.value,
                         })
                       }
-                      className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/15 focus:outline-none transition-colors"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {/* Email */}
                   <div>
                     <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider mb-2">
                       {t("fieldEmail")} *
@@ -176,11 +172,10 @@ export const PartnershipForm: React.FC = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
                       }
-                      className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/15 focus:outline-none transition-colors"
                     />
                   </div>
 
-                  {/* Country */}
                   <div>
                     <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider mb-2">
                       {t("fieldCountry")} *
@@ -193,13 +188,12 @@ export const PartnershipForm: React.FC = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, country: e.target.value })
                       }
-                      className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/15 focus:outline-none transition-colors"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {/* Organization Type */}
                   <div>
                     <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider mb-2">
                       {t("fieldOrgType")} *
@@ -213,7 +207,7 @@ export const PartnershipForm: React.FC = () => {
                             .value as PartnershipFormData["organizationType"],
                         })
                       }
-                      className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/15 focus:outline-none transition-colors"
                     >
                       <option value="institution">{t("optInstitution")}</option>
                       <option value="ngo">{t("optNgo")}</option>
@@ -224,7 +218,6 @@ export const PartnershipForm: React.FC = () => {
                     </select>
                   </div>
 
-                  {/* Area of Interest */}
                   <div>
                     <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider mb-2">
                       {t("fieldFocus")} *
@@ -238,7 +231,7 @@ export const PartnershipForm: React.FC = () => {
                             .value as PartnershipFormData["focusArea"],
                         })
                       }
-                      className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/15 focus:outline-none transition-colors"
                     >
                       <option value="multi-sector">{t("optAllFocus")}</option>
                       <option value="education">Education</option>
@@ -250,7 +243,6 @@ export const PartnershipForm: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Message */}
                 <div>
                   <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider mb-2">
                     {t("fieldMessage")} *
@@ -262,13 +254,14 @@ export const PartnershipForm: React.FC = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
                     }
-                    className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors leading-relaxed"
+                    className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/15 focus:outline-none transition-colors leading-relaxed"
                   />
                 </div>
 
+                {/* Submit Button: Green */}
                 <div className="pt-2">
                   <Button
-                    variant="gold"
+                    variant="primary"
                     size="lg"
                     className="w-full sm:w-auto shadow-md"
                     disabled={isSubmitting}

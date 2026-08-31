@@ -6,7 +6,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl =
     process.env.NEXT_PUBLIC_SITE_URL || "https://impakt-gateway.org";
 
-  // Core static pages
   const staticRoutes = [
     "",
     "/about",
@@ -27,7 +26,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const sitemapEntries: MetadataRoute.Sitemap = [];
 
-  // Generate localized entries for static routes
   for (const route of staticRoutes) {
     for (const locale of locales) {
       let priority = 0.6;
@@ -60,7 +58,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  // Dynamic verified projects
   const verifiedProjects = projects.filter((p) => p.verified);
   for (const project of verifiedProjects) {
     for (const locale of locales) {

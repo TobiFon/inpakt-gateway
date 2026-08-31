@@ -105,7 +105,6 @@ export const ContactForm: React.FC = () => {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Honeypot */}
             <input
               type="text"
               name="website"
@@ -120,7 +119,6 @@ export const ContactForm: React.FC = () => {
             />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* Name */}
               <div>
                 <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider mb-2">
                   {t("fieldName")} *
@@ -132,11 +130,10 @@ export const ContactForm: React.FC = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/15 focus:outline-none transition-colors"
                 />
               </div>
 
-              {/* Email */}
               <div>
                 <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider mb-2">
                   {t("fieldEmail")} *
@@ -148,13 +145,12 @@ export const ContactForm: React.FC = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/15 focus:outline-none transition-colors"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* Category */}
               <div>
                 <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider mb-2">
                   {t("fieldCategory")} *
@@ -167,7 +163,7 @@ export const ContactForm: React.FC = () => {
                       category: e.target.value as ContactFormData["category"],
                     })
                   }
-                  className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/15 focus:outline-none transition-colors"
                 >
                   <option value="general">{t("catGeneral")}</option>
                   <option value="partnership">{t("catPartnership")}</option>
@@ -177,7 +173,6 @@ export const ContactForm: React.FC = () => {
                 </select>
               </div>
 
-              {/* Subject */}
               <div>
                 <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider mb-2">
                   {t("fieldSubject")} *
@@ -189,12 +184,11 @@ export const ContactForm: React.FC = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, subject: e.target.value })
                   }
-                  className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors"
+                  className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/15 focus:outline-none transition-colors"
                 />
               </div>
             </div>
 
-            {/* Message */}
             <div>
               <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider mb-2">
                 {t("fieldMessage")} *
@@ -206,13 +200,14 @@ export const ContactForm: React.FC = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, message: e.target.value })
                 }
-                className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-gold-primary focus:ring-2 focus:ring-gold-primary/15 focus:outline-none transition-colors leading-relaxed"
+                className="w-full px-4 py-3 rounded-2xl border border-cream-border bg-white text-sm text-charcoal-900 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/15 focus:outline-none transition-colors leading-relaxed"
               />
             </div>
 
+            {/* Submit Button: Green */}
             <div className="pt-2">
               <Button
-                variant="gold"
+                variant="primary"
                 size="lg"
                 className="w-full sm:w-auto shadow-md"
                 disabled={isSubmitting}
