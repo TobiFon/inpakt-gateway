@@ -82,7 +82,6 @@ export function createSiteMetadata({
     },
   };
 }
-
 export function getOrganizationSchema() {
   const baseUrl =
     process.env.NEXT_PUBLIC_SITE_URL || "https://impakt-gateway.org";
@@ -91,12 +90,19 @@ export function getOrganizationSchema() {
     "@context": "https://schema.org",
     "@type": "NGO",
     name: "Impakt Gateway e.V.",
+    legalName: "Impakt Gateway e.V.",
     alternateName: "Impakt Gateway",
     url: baseUrl,
     logo: `${baseUrl}/logo.png`,
     email: CONTACT_INFO.email,
     description:
-      "Germany-registered non-profit organization connecting Africa and Germany through partnerships, opportunities, resources, and sustainable development initiatives.",
+      "Germany-registered non-profit organization (e.V.) connecting Africa and Germany through partnerships, opportunities, resources, and sustainable development initiatives.",
+    identifier: `${CONTACT_INFO.registrationCourt}, ${CONTACT_INFO.registrationNumber}`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Berlin",
+      addressCountry: "DE",
+    },
     areaServed: [
       {
         "@type": "Place",

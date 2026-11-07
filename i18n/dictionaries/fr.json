@@ -417,6 +417,8 @@
     "transparencyText2": "Les dons effectués depuis l'Allemagne sont fiscalement déductibles. Nous délivrons sur demande une attestation officielle de don (Zuwendungsbestätigung)."
   },
   "contactPage": {
+    "headquartersTitle": "Siège Officiel (Allemagne)",
+    "headquartersDesc": "Impakt Gateway e.V.\nBerlin, Allemagne\nAmtsgericht Charlottenburg • VR 42655 B",
     "badge": "CONTACTEZ-NOUS",
     "heroTitle": "Bâtissons des",
     "heroHighlight": "passerelles durables.",
@@ -426,8 +428,6 @@
     "emailCardTitle": "Contact par E-mail",
     "emailCardDesc": "Pour vos questions générales et propositions d'échanges",
     "locationsCardTitle": "Présence Bilatérale & Réseau",
-    "headquartersTitle": "Siège Officiel (Allemagne)",
-    "headquartersDesc": "Impakt Gateway e.V.\nAllemagne",
     "liaisonTitle": "Réseau de Coordination Continentale (Afrique)",
     "liaisonDesc": "Coordination des Programmes Impakt Gateway\nRéseau de Liaison Afrique",
     "socialsCardTitle": "Réseaux & Actualités",
@@ -463,12 +463,12 @@
     "impressum": {
       "sec1Title": "Informations conformément au § 5 DDG (Loi sur les services numériques)",
       "sec1Org": "Impakt Gateway e.V.",
-      "sec1Status": "Association à but non lucratif (eingetragener Verein) en cours d'enregistrement\nAllemagne & Afrique",
+      "sec1Status": "Forme juridique : Association enregistrée à but non lucratif (e.V.)\nSiège social : Berlin, Allemagne",
       "sec2Title": "Contact",
       "sec3Title": "Conseil d'administration représentant",
       "sec3Desc": "Impakt Gateway e.V. est légalement représentée par le conseil d'administration conformément aux statuts.",
       "sec4Title": "Inscription au registre",
-      "sec4Desc": "Inscription au registre des associations.\nTribunal d'enregistrement : Amtsgericht (complété après enregistrement formel)\nNuméro d'enregistrement : VR (en cours d'attribution)",
+      "sec4Desc": "Inscription au registre des associations (Vereinsregister).\nTribunal d'enregistrement : Amtsgericht Charlottenburg (Berlin)\nNuméro de registre : VR 42655 B",
       "sec5Title": "Caractère d'intérêt général & Objet fiscal",
       "sec5Desc": "L'association poursuit exclusivement et directement des fins d'intérêt général au sens du Code fiscal allemand (AO), notamment la promotion de l'entente entre les peuples, de l'éducation et de la coopération au développement entre les nations africaines et l'Allemagne.",
       "sec6Title": "Responsabilité des contenus",
@@ -560,7 +560,16 @@
     "impressum": "Mentions Légales",
     "privacy": "Politique de Confidentialité",
     "cookies": "Gestion des cookies",
-    "followNetwork": "Suivez nos réseaux"
+    "followNetwork": "Suivez nos réseaux",
+    "registryTitle": "Registre des Associations & Représentation Légale",
+    "legalFormLabel": "Forme juridique",
+    "legalFormVal": "Eingetragener Verein (e.V.)",
+    "seatLabel": "Siège social",
+    "seatVal": "Berlin, Allemagne",
+    "courtLabel": "Tribunal d'enregistrement",
+    "courtVal": "Amtsgericht Charlottenburg",
+    "regNumberLabel": "Numéro de registre",
+    "regNumberVal": "VR 42655 B"
   },
   "cta": {
     "pillTag": "Partenariat Afrique ↔ Allemagne",

@@ -417,6 +417,8 @@
     "transparencyText2": "Donations from Germany are tax-deductible. We provide official donation receipts (Zuwendungsbestätigungen) upon request for tax filing purposes."
   },
   "contactPage": {
+    "headquartersTitle": "Registered Headquarters (Germany)",
+    "headquartersDesc": "Impakt Gateway e.V.\nBerlin, Germany\nAmtsgericht Charlottenburg • VR 42655 B",
     "badge": "GET IN TOUCH",
     "heroTitle": "Let's Connect &",
     "heroHighlight": "Build Bridges.",
@@ -426,8 +428,6 @@
     "emailCardTitle": "Email Communication",
     "emailCardDesc": "For general questions, collaborations and inquiries",
     "locationsCardTitle": "Official Presence & Liaison",
-    "headquartersTitle": "Registered Headquarters (Germany)",
-    "headquartersDesc": "Impakt Gateway e.V.\nGermany",
     "liaisonTitle": "Continental Liaison Network (Africa)",
     "liaisonDesc": "Impakt Gateway Program Coordination\nAfrica Liaison Network",
     "socialsCardTitle": "Follow Our Network",
@@ -463,12 +463,12 @@
     "impressum": {
       "sec1Title": "Information pursuant to § 5 DDG (German Digital Services Act)",
       "sec1Org": "Impakt Gateway e.V.",
-      "sec1Status": "Registered Non-Profit Association (eingetragener Verein) in registration\nGermany & Africa",
+      "sec1Status": "Legal Form: Registered Non-Profit Association (e.V.)\nRegistered Seat: Berlin, Germany",
       "sec2Title": "Contact",
       "sec3Title": "Authorized Board Representatives",
       "sec3Desc": "Impakt Gateway e.V. is legally represented by the Executive Board in accordance with the association's statutes.",
       "sec4Title": "Register Entry",
-      "sec4Desc": "Entry in the register of associations.\nRegistry Court: Local Court (Amtsgericht - added upon formal entry)\nRegistration Number: VR (in assignment)",
+      "sec4Desc": "Entry in the register of associations (Vereinsregister).\nRegistration Court: Amtsgericht Charlottenburg (Berlin)\nRegistration Number: VR 42655 B",
       "sec5Title": "Non-Profit Status & Tax Purpose",
       "sec5Desc": "The association exclusively and directly pursues non-profit purposes within the meaning of the German Tax Code (Abgabenordnung - AO), particularly the promotion of international understanding, education, and development cooperation between African nations and Germany.",
       "sec6Title": "Liability for Content",
@@ -560,7 +560,16 @@
     "impressum": "Impressum",
     "privacy": "Privacy Policy",
     "cookies": "Cookie Settings",
-    "followNetwork": "Follow Our Network"
+    "followNetwork": "Follow Our Network",
+    "registryTitle": "Register of Associations & Legal Representation",
+    "legalFormLabel": "Legal Form",
+    "legalFormVal": "Eingetragener Verein (e.V.)",
+    "seatLabel": "Registered Seat",
+    "seatVal": "Berlin, Germany",
+    "courtLabel": "Registration Court",
+    "courtVal": "Amtsgericht Charlottenburg",
+    "regNumberLabel": "Registration Number",
+    "regNumberVal": "VR 42655 B"
   },
   "cta": {
     "pillTag": "Africa ↔ Germany Collaboration",

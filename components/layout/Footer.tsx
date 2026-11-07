@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, ShieldCheck } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SocialLinks } from "@/components/shared/SocialLinks";
 import { allNavItems, focusAreas } from "@/content/navigation";
@@ -26,6 +26,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className="bg-white text-charcoal-700 pt-16 pb-12 border-t border-cream-border mt-auto overflow-hidden">
       <Container>
+        {/* Main 4-Column Navigation Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-cream-border">
           {/* Brand Column */}
           <div className="lg:col-span-4 flex flex-col justify-between">
@@ -124,8 +125,85 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-charcoal-500 text-center md:text-left font-medium">
+        {/* Vereinsregister und Vertretungsberechtigung Block */}
+        <div className="my-8 p-5 sm:p-6 rounded-2xl bg-cream-50/70 border border-cream-border">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-brand-primary shrink-0" />
+                <h4 className="text-xs font-extrabold uppercase tracking-widest text-charcoal-900">
+                  {tFooter("registryTitle")}
+                </h4>
+              </div>
+              <p className="mt-1 font-bold text-sm text-brand-darkest">
+                Impakt Gateway e.V.
+              </p>
+            </div>
+
+            {/* Structured Details Row */}
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs">
+              <div className="flex items-center gap-1.5">
+                <span className="text-charcoal-500 font-medium">
+                  {tFooter("legalFormLabel")}:
+                </span>
+                <span className="font-semibold text-charcoal-900">
+                  {tFooter("legalFormVal")}
+                </span>
+              </div>
+
+              <span
+                className="text-cream-300 hidden sm:inline"
+                aria-hidden="true"
+              >
+                •
+              </span>
+
+              <div className="flex items-center gap-1.5">
+                <span className="text-charcoal-500 font-medium">
+                  {tFooter("seatLabel")}:
+                </span>
+                <span className="font-semibold text-charcoal-900">
+                  {tFooter("seatVal")}
+                </span>
+              </div>
+
+              <span
+                className="text-cream-300 hidden sm:inline"
+                aria-hidden="true"
+              >
+                •
+              </span>
+
+              <div className="flex items-center gap-1.5">
+                <span className="text-charcoal-500 font-medium">
+                  {tFooter("courtLabel")}:
+                </span>
+                <span className="font-semibold text-charcoal-900">
+                  {tFooter("courtVal")}
+                </span>
+              </div>
+
+              <span
+                className="text-cream-300 hidden sm:inline"
+                aria-hidden="true"
+              >
+                •
+              </span>
+
+              <div className="flex items-center gap-1.5">
+                <span className="text-charcoal-500 font-medium">
+                  {tFooter("regNumberLabel")}:
+                </span>
+                <span className="font-mono font-bold text-brand-darkest bg-gold-warm px-2.5 py-1 rounded-full border border-gold-border/80 text-[11px] shadow-2xs">
+                  {tFooter("regNumberVal")}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar: Copyright & Legal Navigation */}
+        <div className="pt-2 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-charcoal-500 text-center md:text-left font-medium">
           <p>
             &copy; {new Date().getFullYear()} Impakt Gateway e.V.{" "}
             {tFooter("copyright")}

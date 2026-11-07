@@ -2,7 +2,8 @@ import { DonationConfig } from "@/types/donation";
 
 export const donationConfig: DonationConfig = {
   organizationName: "Impakt Gateway e.V.",
-  registrationStatus: "Eingetragener Verein (e.V.) – Germany & Africa",
+  registrationStatus:
+    "Eingetragener Verein (e.V.) • Amtsgericht Charlottenburg (VR 42655 B) • Sitz: Berlin",
   bank: {
     accountHolder: "Impakt Gateway e.V.",
     bankName: "GLS Bank / EthikBank (In Setup)",
