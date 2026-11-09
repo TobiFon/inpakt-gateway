@@ -3,8 +3,9 @@ export const DEFAULT_LOCALE = "en";
 export const SUPPORTED_LOCALES = ["en", "de", "fr"] as const;
 
 export const CONTACT_INFO = {
-  email: "info@impakt-gateway.org",
-  receivingEmail: "fclerencef@gmail.com",
+  email: "contact@impaktgateway.de",
+  partnershipEmail: "partnership@impaktgateway.de",
+  receivingEmail: "fclerencef@impaktgateway.de",
   seat: "Berlin, Deutschland",
   registrationCourt: "Amtsgericht Charlottenburg",
   registrationNumber: "VR 42655 B",

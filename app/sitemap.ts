@@ -4,7 +4,7 @@ import { projects } from "@/content/project";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://impakt-gateway.org";
+    process.env.NEXT_PUBLIC_SITE_URL || "https://impaktgateway.de";
 
   const staticRoutes = [
     "",
