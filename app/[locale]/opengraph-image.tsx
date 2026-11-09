@@ -157,10 +157,10 @@ export default async function OpenGraphImage() {
           }}
         >
           <span style={{ fontSize: "15px", color: "#cbd5d0" }}>
-            Registered Non-Profit Association (e.V.) • Germany & Africa
+            Registered Non-Profit Association (e.V.) • Berlin, Germany
           </span>
           <span style={{ fontSize: "16px", color: "#f3b84a", fontWeight: 800 }}>
-            impakt-gateway.org
+            impaktgateway.de
           </span>
         </div>
       </div>

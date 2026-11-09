@@ -11,7 +11,7 @@ export const donationConfig: DonationConfig = {
     bic: "GENODEM1GLS",
     referencePrefix: "Spende / Donation - Impakt Gateway",
   },
-  paypalEmail: "donate@impakt-gateway.org",
+  paypalEmail: "contact@impaktgateway.de",
   paypalDonationUrl: "https://paypal.me/impaktgateway",
   taxDeductibleGermany: true,
 };

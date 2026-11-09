@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { validatePartnershipPayload } from "@/lib/validation";
-import { sendPartnershipEmail } from "@/lib/email";
+import { sendPartnershipEmail, PARTNERSHIP_RECEIVING_EMAIL } from "@/lib/email";
 
 export async function POST(request: NextRequest) {
   try {
@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
 
     const { sanitizedData } = validation;
 
-    // Send email to fclerencef@gmail.com via Resend
+    // Send email to official partnerships inbox via Resend
     await sendPartnershipEmail({
       fullName: sanitizedData.fullName,
       organization: sanitizedData.organization,
@@ -30,15 +30,17 @@ export async function POST(request: NextRequest) {
       message: sanitizedData.message,
     });
 
-    console.info("[Impakt Gateway API] New Partnership Proposal Received & Dispatched:", {
-      fullName: sanitizedData.fullName,
-      organization: sanitizedData.organization,
-      country: sanitizedData.country,
-      email: sanitizedData.email,
-      organizationType: sanitizedData.organizationType,
-      focusArea: sanitizedData.focusArea,
-      timestamp: new Date().toISOString(),
-    });
+    console.info(
+      "[Impakt Gateway API] Partnership Proposal dispatched successfully:",
+      {
+        recipient: PARTNERSHIP_RECEIVING_EMAIL,
+        organization: sanitizedData.organization,
+        contactPerson: sanitizedData.fullName,
+        email: sanitizedData.email,
+        focusArea: sanitizedData.focusArea,
+        timestamp: new Date().toISOString(),
+      }
+    );
 
     return NextResponse.json(
       {

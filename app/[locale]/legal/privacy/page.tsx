@@ -38,17 +38,22 @@ export default function PrivacyPage() {
           {c("sec2Title")}
         </h2>
         <p>{c("sec2Desc")}</p>
-        <p className="p-4 rounded-2xl bg-cream-50 border border-cream-border font-semibold">
-          Impakt Gateway e.V.
-          <br />
-          E-Mail:{" "}
-          <a
-            href={`mailto:${CONTACT_INFO.email}`}
-            className="text-brand-primary hover:underline font-bold"
-          >
-            {CONTACT_INFO.email}
-          </a>
-        </p>
+        <div className="p-4 rounded-2xl bg-cream-50 border border-cream-border font-medium text-sm text-charcoal-800 space-y-1">
+          <p className="font-bold text-charcoal-900">Impakt Gateway e.V.</p>
+          <p>{CONTACT_INFO.legalAddress}</p>
+          <p className="text-xs text-charcoal-600">
+            {CONTACT_INFO.registrationCourt} • {CONTACT_INFO.registrationNumber}
+          </p>
+          <p className="pt-2">
+            E-Mail:{" "}
+            <a
+              href={`mailto:${CONTACT_INFO.email}`}
+              className="text-brand-primary hover:underline font-bold"
+            >
+              {CONTACT_INFO.email}
+            </a>
+          </p>
+        </div>
       </section>
 
       <section className="space-y-3">

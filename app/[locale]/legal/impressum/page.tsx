@@ -49,7 +49,7 @@ export default function ImpressumPage() {
           <br />
           Internet:{" "}
           <a
-            href="https://impakt-gateway.org"
+            href="https://impaktgateway.de"
             className="text-brand-primary font-bold hover:underline"
           >
             https://impaktgateway.de

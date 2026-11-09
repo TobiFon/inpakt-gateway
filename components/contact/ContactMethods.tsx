@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslations } from "next-intl";
-import { Mail, MapPin, Share2 } from "lucide-react";
+import { Mail, MapPin, Share2, Handshake } from "lucide-react";
 import { CONTACT_INFO } from "@/lib/constants";
 import { Card } from "@/components/ui/Card";
 import { SocialLinks } from "@/components/shared/SocialLinks";
@@ -10,7 +10,7 @@ export const ContactMethods: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Email Card */}
+      {/* Email Card (General & Partnerships) */}
       <Card
         variant="white"
         className="p-7 border border-cream-border shadow-card"
@@ -19,19 +19,42 @@ export const ContactMethods: React.FC = () => {
           <div className="w-12 h-12 rounded-2xl bg-brand-subtle text-brand-primary border border-brand-border flex items-center justify-center shrink-0 shadow-xs">
             <Mail className="w-6 h-6" />
           </div>
-          <div>
+          <div className="w-full">
             <h3 className="font-bold text-base text-charcoal-900 mb-1">
               {t("emailCardTitle")}
             </h3>
-            <p className="text-xs text-charcoal-600 mb-3">
+            <p className="text-xs text-charcoal-600 mb-4">
               {t("emailCardDesc")}
             </p>
-            <a
-              href={`mailto:${CONTACT_INFO.email}`}
-              className="text-sm font-bold text-brand-primary hover:text-gold-deep transition-colors"
-            >
-              {CONTACT_INFO.email}
-            </a>
+
+            <div className="space-y-3 pt-2 border-t border-cream-border">
+              <div>
+                <span className="text-[11px] font-bold text-charcoal-500 uppercase tracking-wider block mb-0.5">
+                  General Inquiries
+                </span>
+                <a
+                  href={`mailto:${CONTACT_INFO.email}`}
+                  className="text-sm font-bold text-brand-primary hover:text-gold-deep transition-colors break-all"
+                >
+                  {CONTACT_INFO.email}
+                </a>
+              </div>
+
+              {CONTACT_INFO.partnershipEmail && (
+                <div>
+                  <span className="text-[11px] font-bold text-gold-deep uppercase tracking-wider flex items-center gap-1 mb-0.5">
+                    <Handshake className="w-3 h-3 text-gold-primary" />
+                    Partnership Proposals
+                  </span>
+                  <a
+                    href={`mailto:${CONTACT_INFO.partnershipEmail}`}
+                    className="text-sm font-bold text-brand-primary hover:text-gold-deep transition-colors break-all"
+                  >
+                    {CONTACT_INFO.partnershipEmail}
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </Card>
@@ -54,7 +77,7 @@ export const ContactMethods: React.FC = () => {
               <p className="font-bold text-brand-darkest flex items-center gap-1.5">
                 <span>🇩🇪</span> {t("headquartersTitle")}
               </p>
-              <p className="text-charcoal-600 pl-5 whitespace-pre-line">
+              <p className="text-charcoal-600 pl-5 whitespace-pre-line leading-relaxed">
                 {t("headquartersDesc")}
               </p>
             </div>
@@ -63,7 +86,7 @@ export const ContactMethods: React.FC = () => {
               <p className="font-bold text-brand-darkest flex items-center gap-1.5">
                 <span>🌍</span> {t("liaisonTitle")}
               </p>
-              <p className="text-charcoal-600 pl-5 whitespace-pre-line">
+              <p className="text-charcoal-600 pl-5 whitespace-pre-line leading-relaxed">
                 {t("liaisonDesc")}
               </p>
             </div>

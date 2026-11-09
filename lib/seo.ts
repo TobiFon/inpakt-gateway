@@ -19,7 +19,7 @@ export function createSiteMetadata({
   type = "website",
 }: GenerateMetadataProps): Metadata {
   const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://impakt-gateway.org";
+    process.env.NEXT_PUBLIC_SITE_URL || "https://impaktgateway.de";
   const url = `${baseUrl}/${locale}${pathname}`;
 
   return {
@@ -82,9 +82,10 @@ export function createSiteMetadata({
     },
   };
 }
+
 export function getOrganizationSchema() {
   const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://impakt-gateway.org";
+    process.env.NEXT_PUBLIC_SITE_URL || "https://impaktgateway.de";
 
   return {
     "@context": "https://schema.org",
