@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { validateContactPayload } from "@/lib/validation";
-import { sendContactEmail, RECEIVING_EMAIL } from "@/lib/email";
+import { sendContactEmail } from "@/lib/email";
 
 export async function POST(request: NextRequest) {
   try {
@@ -31,7 +31,6 @@ export async function POST(request: NextRequest) {
     console.info(
       "[Impakt Gateway API] Contact Inquiry dispatched successfully:",
       {
-        recipient: RECEIVING_EMAIL,
         from: sanitizedData.email,
         senderName: sanitizedData.name,
         category: sanitizedData.category,
